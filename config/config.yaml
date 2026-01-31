@@ -1,0 +1,198 @@
+# Production-Grade E-Commerce Semantic Search RAG System Configuration
+# This configuration captures all system hyperparameters and settings
+
+# ============================================================================
+# DATA INGESTION CONFIGURATION
+# ============================================================================
+data:
+  input_path: "data/products.csv"
+  raw_data_cache: "data/raw_products.pkl"
+  encoding: "utf-8"
+  validation:
+    required_columns:
+      - product_id
+      - product_name
+      - category
+      - description
+      - price
+      - rating
+    missing_value_strategy: "drop"  # drop, forward_fill, or default
+    duplicate_strategy: "first"      # first or last
+
+# ============================================================================
+# TEXT PREPROCESSING CONFIGURATION
+# ============================================================================
+preprocessing:
+  # Lowercasing
+  lowercase: true
+  
+  # Remove URLs, emails, special characters
+  remove_urls: true
+  remove_emails: true
+  remove_special_chars: true
+  
+  # Whitespace normalization
+  remove_extra_whitespace: true
+  min_text_length: 10  # Minimum characters for valid text
+  
+  # Semantic preservation - NO aggressive stemming or lemmatization
+  # because embeddings capture semantics better than keyword reduction
+  remove_stopwords: false  # IMPORTANT: Keep stopwords for semantic models
+  use_stemming: false      # IMPORTANT: Avoid stemming, hurts embeddings
+  
+  # Text field processing
+  description_max_tokens: 512  # Truncate long descriptions for efficiency
+  
+  caching:
+    enabled: true
+    path: "data/preprocessed_products.pkl"
+
+# ============================================================================
+# EMBEDDING GENERATION CONFIGURATION
+# ============================================================================
+embeddings:
+  model_name: "models/embedding-001"
+  normalize: true
+  cache_embeddings: true
+  embedding_cache_path: "data/embeddings.npy"
+
+  
+  # Pooling strategy for SentenceTransformer
+  pooling_strategy: "mean"  # mean, max, or cls
+
+# ============================================================================
+# VECTOR STORE CONFIGURATION (FAISS)
+# ============================================================================
+vector_store:
+  # FAISS Index type selection
+  # Flat: Exact nearest neighbor search, O(n) complexity
+  # IVF: Inverted file, O(log n) complexity, good for scaling
+  index_type: "Flat"  # Start with Flat for accuracy, scale to IVF later
+  
+  # IVF specific parameters (if index_type is IVF)
+  nlist: 100  # Number of Voronoi cells
+  nprobe: 10  # Cells to search during query
+  
+  # Dimensionality (must match embedding_dim)
+  dimension: 768
+  
+  # Persistence
+  index_path: "models/faiss_index.bin"
+  metadata_path: "models/metadata.pkl"  # Store product info mapping
+  
+  # Memory optimization
+  use_gpu: false  # Set true if GPU available for faster search
+
+# ============================================================================
+# RETRIEVAL CONFIGURATION
+# ============================================================================
+retrieval:
+  # Number of top-K candidates to retrieve
+  top_k: 5
+  
+  # Similarity threshold (for filtering low-relevance results)
+  # Cosine similarity ranges from -1 to 1 (0 to 1 after normalization)
+  similarity_threshold: 0.3
+  
+  # Ranking strategy after retrieval
+  ranking:
+    use_mmr: false  # Maximal Marginal Relevance for diversity
+    diversity_penalty: 0.0  # Higher = more diverse, less relevant
+    
+    # Optional: Re-ranker model for post-retrieval refinement
+    use_reranker: false
+    reranker_model: "cross-encoder/qnli-distilroberta-base"
+
+# ============================================================================
+# RAG GENERATION CONFIGURATION
+# ============================================================================
+rag:
+  # LLM Selection - using Gemini API
+  llm_provider: "gemini"
+  api_key_env: "GEMINI_API_KEY"  # Load from environment
+  model_name: "gemini-pro"
+  
+  # Generation parameters
+  temperature: 0.3  # Low temperature for factuality
+  max_output_tokens: 200
+  top_p: 0.9
+  top_k: 40
+  
+  # RAG-specific settings
+  context_window_size: 3000  # Maximum tokens for context from retrieval
+  max_products_in_context: 5  # Maximum products to include in prompt
+  
+  # Hallucination prevention
+  instruction: "You are an e-commerce product assistant. ONLY recommend products from the provided list. Do NOT invent products or information not in the context."
+  
+  # Prompt template (will be used in rag_pipeline.py)
+  prompt_template_path: "config/prompt_template.txt"
+  
+  # Response format
+  include_confidence: true
+  explain_reasoning: true
+
+# ============================================================================
+# EVALUATION CONFIGURATION
+# ============================================================================
+evaluation:
+  # Test queries and expected product categories
+  test_queries:
+    - query: "Budget running shoes for beginners"
+      expected_categories:
+        - "shoes"
+        - "sports"
+      expected_price_range: "low"
+    
+    - query: "Laptop suitable for video editing under 80k"
+      expected_categories:
+        - "laptops"
+        - "electronics"
+      expected_price_range: "high"
+    
+    - query: "Wireless headphones with strong bass and long battery life"
+      expected_categories:
+        - "headphones"
+        - "audio"
+      expected_price_range: "medium"
+    
+    - query: "Comfortable office chair for long hours"
+      expected_categories:
+        - "furniture"
+        - "office"
+      expected_price_range: "medium"
+    
+    - query: "Yoga mat for home workouts"
+      expected_categories:
+        - "fitness"
+        - "sports"
+      expected_price_range: "low"
+  
+  # Evaluation metrics
+  metrics:
+    top_k_for_metrics: [1, 5]  # Calculate metrics at K=1 and K=5
+    
+    # Qualitative checks
+    check_hallucination: true
+    check_relevance: true
+    check_explanation: true
+  
+  # Error analysis
+  save_results: true
+  results_path: "evaluation_results.json"
+
+# ============================================================================
+# LOGGING AND DEBUGGING
+# ============================================================================
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  log_file: "system.log"
+  
+# ============================================================================
+# SYSTEM PARAMETERS
+# ============================================================================
+system:
+  random_seed: 42
+  num_workers: 4  # For parallel processing
+  debug_mode: true
