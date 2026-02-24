@@ -51,7 +51,7 @@ preprocessing:
 # EMBEDDING GENERATION CONFIGURATION
 # ============================================================================
 embeddings:
-  model_name: "models/embedding-001"
+  model_name: "models/gemini-embedding-001"
   normalize: true
   cache_embeddings: true
   embedding_cache_path: "data/embeddings.npy"
@@ -74,7 +74,7 @@ vector_store:
   nprobe: 10  # Cells to search during query
   
   # Dimensionality (must match embedding_dim)
-  dimension: 768
+  dimension: 3072
   
   # Persistence
   index_path: "models/faiss_index.bin"
@@ -94,6 +94,12 @@ retrieval:
   # Cosine similarity ranges from -1 to 1 (0 to 1 after normalization)
   similarity_threshold: 0.3
   
+  # Out-of-Domain (OOD) Detection Threshold
+  # If max_similarity OR avg_top_k_similarity < domain_threshold,
+  # the query is classified as OUT-OF-DOMAIN and recommendations are rejected
+  # Standard value: 0.65 (recommended for semantic search)
+  domain_threshold: 0.65
+  
   # Ranking strategy after retrieval
   ranking:
     use_mmr: false  # Maximal Marginal Relevance for diversity
@@ -109,8 +115,8 @@ retrieval:
 rag:
   # LLM Selection - using Gemini API
   llm_provider: "gemini"
-  api_key_env: "GEMINI_API_KEY"  # Load from environment
-  model_name: "gemini-pro"
+  api_key_env: "GOOGLE_API_KEY"  # Load from environment
+  model_name: "gemini-2.0-flash"
   
   # Generation parameters
   temperature: 0.3  # Low temperature for factuality

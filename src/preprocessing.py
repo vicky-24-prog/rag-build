@@ -36,23 +36,10 @@ logger = logging.getLogger(__name__)
 
 
 class PreprocessingLayer:
-    """
-    Clean and normalize text data while preserving semantic meaning.
-    
-    Design Principles:
-    - Light touch: Don't over-clean (embeddings handle it better)
-    - Explainability: Log each preprocessing decision
-    - Semantic preservation: Keep content meaningful
-    - Reproducibility: Cache results
-    """
+    """Clean and normalize text while preserving semantic meaning."""
     
     def __init__(self, config_path: str = "config/config.yaml"):
-        """
-        Initialize preprocessing layer with configuration.
-        
-        Args:
-            config_path: Path to YAML configuration file
-        """
+        """Initialize preprocessing layer."""
         self.config = self._load_config(config_path)
         self.preproc_config = self.config.get("preprocessing", {})
         self.preprocessed_df = None
@@ -69,20 +56,14 @@ class PreprocessingLayer:
     
     def preprocess(self, df: pd.DataFrame, force_reprocess: bool = False) -> pd.DataFrame:
         """
-        Preprocess product descriptions.
-        
-        Strategy:
-        1. Check cache first (if enabled)
-        2. Apply preprocessing pipeline to descriptions
-        3. Apply to other text fields
-        4. Save cache
+        Preprocess product descriptions with caching.
         
         Args:
-            df: Raw dataframe from ingestion layer
-            force_reprocess: If True, skip cache and reprocess
+            df: Raw dataframe from ingestion
+            force_reprocess: If True, skip cache
             
         Returns:
-            pd.DataFrame: Preprocessed dataframe
+            Preprocessed dataframe
         """
         cache_path = self.preproc_config.get("caching", {}).get("path")
         
@@ -134,66 +115,35 @@ class PreprocessingLayer:
         return self.preprocessed_df
     
     def _preprocess_text(self, text: str) -> str:
-        """
-        Apply preprocessing pipeline to a single text string.
-        
-        Pipeline:
-        1. Convert to lowercase
-        2. Remove URLs
-        3. Remove emails
-        4. Normalize whitespace
-        5. Remove special characters (but preserve structure)
-        6. Truncate if too long
-        
-        Args:
-            text: Raw text string
-            
-        Returns:
-            Preprocessed text string
-        """
+        """Apply preprocessing pipeline to a single text string."""
         if not isinstance(text, str) or len(text.strip()) == 0:
             return ""
         
-        # 1. Lowercase
         if self.preproc_config.get("lowercase", True):
             text = text.lower()
         
-        # 2. Remove URLs
         if self.preproc_config.get("remove_urls", True):
             text = re.sub(r'http\S+|www\S+|https\S+', '', text, flags=re.MULTILINE)
         
-        # 3. Remove email addresses
         if self.preproc_config.get("remove_emails", True):
             text = re.sub(r'\S+@\S+', '', text)
         
-        # 4. Normalize whitespace (remove extra spaces, tabs, newlines)
         if self.preproc_config.get("remove_extra_whitespace", True):
             text = re.sub(r'\s+', ' ', text)
             text = text.strip()
         
-        # 5. Remove special characters but keep some structure
-        # Keep: alphanumeric, spaces, hyphens, dots, commas (for readability)
         if self.preproc_config.get("remove_special_chars", True):
             text = re.sub(r'[^a-z0-9\s\-.,()]', '', text)
         
-        # 6. Truncate very long descriptions (for efficiency)
         max_tokens_estimate = self.preproc_config.get("description_max_tokens", 512)
-        # Rough estimate: ~4 characters per token
         max_chars = max_tokens_estimate * 4
         if len(text) > max_chars:
-            text = text[:max_chars].rsplit(' ', 1)[0]  # Truncate at word boundary
+            text = text[:max_chars].rsplit(' ', 1)[0]
         
         return text
     
     def _log_field_changes(self, field: str, before: pd.Series, after: pd.Series) -> None:
-        """
-        Log what changed during preprocessing of a field.
-        
-        Args:
-            field: Field name
-            before: Series before preprocessing
-            after: Series after preprocessing
-        """
+        """Log preprocessing changes for a field."""
         # Count changes
         changed_count = (before != after).sum()
         avg_before = before.str.len().mean()
@@ -212,16 +162,7 @@ class PreprocessingLayer:
                 logger.debug(f"    After: {a[:100]}")
     
     def _handle_duplicates(self) -> None:
-        """
-        Detect and handle duplicate descriptions.
-        
-        Duplicates could indicate:
-        - Multiple SKUs of same product
-        - Data entry errors
-        
-        For RAG, duplicates might slightly inflate retrieval relevance,
-        but we keep them as they represent real products.
-        """
+        """Detect duplicate descriptions (keep them as they represent real products)."""
         logger.info("\n--- Duplicate Description Detection ---")
         
         before_count = len(self.preprocessed_df)

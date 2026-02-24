@@ -1,19 +1,7 @@
-"""
-EMBEDDING GENERATION LAYER (API-BASED – PRODUCTION READY)
+"""EMBEDDING GENERATION LAYER
 
-Responsibility:
-Convert product text into dense semantic vectors using Gemini embeddings.
-
-Why API-based embeddings?
-- No local ML binaries (no torch / DLL issues)
-- Matches real-world GenAI production systems
-- Consistent, high-quality semantic representations
-- Easy to scale and maintain
-
-Core Concepts:
-- Semantic meaning > keyword matching
-- Cosine similarity via normalized vectors
-- FAISS-compatible dense embeddings
+Generate semantic embeddings using Gemini API.
+Production-ready, API-based embeddings with no local ML dependencies.
 """
 
 import logging
@@ -30,21 +18,13 @@ logger = logging.getLogger(__name__)
 
 
 class EmbeddingLayer:
-    """
-    Generate semantic embeddings for product descriptions.
-
-    Design Principles:
-    - API-based embeddings (no system dependency risk)
-    - Normalized vectors for cosine similarity
-    - Caching for performance
-    - Clear logging for explainability
-    """
+    """Generate semantic embeddings for product descriptions using Gemini API."""
 
     def __init__(self, config_path: str = "config/config.yaml"):
         self.config = self._load_config(config_path)
         self.embed_config = self.config.get("embeddings", {})
         self.model_name = self.embed_config.get(
-            "model_name", "models/embedding-001"
+            "model_name", "models/gemini-embedding-001"
         )
 
         self.embeddings = None
@@ -64,18 +44,19 @@ class EmbeddingLayer:
         force_regenerate: bool = False
     ) -> np.ndarray:
         """
-        Generate embeddings for product descriptions.
-
-        Strategy:
-        1. Load cached embeddings if available
-        2. Generate embeddings via Gemini API
-        3. Normalize vectors
-        4. Cache results
+        Generate embeddings for product descriptions with caching.
+        
+        Args:
+            df: Preprocessed dataframe
+            text_field: Column to embed
+            force_regenerate: Skip cache
+            
+        Returns:
+            Tuple of (embeddings, product_ids)
         """
 
         cache_path = self.embed_config.get("embedding_cache_path")
 
-        # Load from cache
         if not force_regenerate and cache_path and Path(cache_path).exists():
             logger.info(f"Loading embeddings from cache: {cache_path}")
             self.embeddings = np.load(cache_path)
@@ -104,7 +85,7 @@ class EmbeddingLayer:
 
         logger.info(f"✓ Generated embeddings: shape {embeddings.shape}")
 
-        # Normalize for cosine similarity
+
         if self.embed_config.get("normalize", True):
             embeddings = embeddings / (
                 np.linalg.norm(embeddings, axis=1, keepdims=True) + 1e-8
@@ -113,7 +94,6 @@ class EmbeddingLayer:
 
         self.embeddings = embeddings
 
-        # Cache embeddings
         if cache_path and self.embed_config.get("cache_embeddings", True):
             Path(cache_path).parent.mkdir(parents=True, exist_ok=True)
             np.save(cache_path, embeddings)
@@ -123,9 +103,7 @@ class EmbeddingLayer:
         return embeddings, self.product_ids
 
     def get_embedding_for_query(self, query: str) -> np.ndarray:
-        """
-        Generate embedding for a user query.
-        """
+        """Generate embedding for a user query."""
         response = genai.embed_content(
             model=self.model_name,
             content=query
@@ -140,9 +118,7 @@ class EmbeddingLayer:
         return query_embedding
 
     def get_embeddings(self) -> Tuple[np.ndarray, np.ndarray]:
-        """
-        Return embeddings and product IDs.
-        """
+        """Return embeddings and product IDs."""
         if self.embeddings is None:
             raise ValueError("Embeddings not generated yet")
 

@@ -2,6 +2,8 @@
 
 **Production-Ready System Design | Semantic Search | Retrieval-Augmented Generation | No Hallucinations**
 
+> ⚡ **Now with Production Safety Features!** See [PRODUCTION_FEATURES.md](PRODUCTION_FEATURES.md) for details on OOD Detection, Confidence Gates, Retrieval Metrics, and Explainability.
+
 ---
 
 ## 🎯 What This System Does
@@ -32,12 +34,44 @@ User Query: "Budget running shoes for beginners"
            ↓
     Finds truly similar products (not just keywords)
            ↓
+    [OOD Detection Gate] ← Production Safety Feature
+           ↓
     [RAG Pipeline]
            ↓
     LLM generates explanation using ONLY retrieved products
            ↓
     Result: Accurate, explainable, NO hallucinations
 ```
+
+---
+
+## 🚀 Production Safety Features (NEW!)
+
+This system now includes enterprise-grade safety mechanisms:
+
+### Feature 1: Out-of-Domain Detection
+- Automatically detects queries outside product domain
+- Rejects recommendations before LLM generation
+- Prevents hallucinations
+
+### Feature 2: Confidence-Based Rejection
+- Only shows recommendations with HIGH or MEDIUM confidence
+- Rejects low-confidence queries with honest feedback
+- Builds user trust
+
+### Feature 3: Retrieval Metrics (Recall@K & MRR)
+- **Recall@K**: Measures coverage of relevant items
+- **MRR**: Measures ranking quality
+- Both standard in production information retrieval systems
+
+### Feature 4: Explainability Layer
+- Shows similarity scores, confidence levels, and decision reasoning
+- Auditable decision paths for every recommendation
+- Transparent rejection messages
+
+→ **Read detailed documentation:** [PRODUCTION_FEATURES.md](PRODUCTION_FEATURES.md)
+
+→ **Implementation details:** [IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)
 
 ---
 

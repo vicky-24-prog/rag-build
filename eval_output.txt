@@ -1,0 +1,880 @@
+﻿.\venv\Scripts\python.exe : 2026-02-23 21:13:37,891 - 
+__main__ - INFO - 
+At line:1 char:1
++ .\venv\Scripts\python.exe src/app.py --eval 2>&1 | 
+Out-File -FilePath ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (2026-02-23 21:1 
+   ...ain__ - INFO - :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+=============================================================
+=========
+2026-02-23 21:13:37,891 - __main__ - INFO - SEMANTIC SEARCH 
+RAG SYSTEM - INITIALIZATION
+2026-02-23 21:13:37,891 - __main__ - INFO - =================
+=====================================================
+2026-02-23 21:13:37,891 - __main__ - INFO - 
+[1/6] Loading Data Ingestion Layer...
+2026-02-23 21:13:39,407 - ingestion - INFO - Loading raw 
+data from cache: data/raw_products.pkl
+2026-02-23 21:13:39,417 - ingestion - INFO - \u2713 Loaded 
+100 products from cache
+2026-02-23 21:13:39,423 - __main__ - INFO - \u2713 Ingestion 
+complete
+2026-02-23 21:13:39,423 - __main__ - INFO - 
+[2/6] Loading Text Preprocessing Layer...
+2026-02-23 21:13:39,432 - preprocessing - INFO - Loading 
+preprocessed data from cache: data/preprocessed_products.pkl
+2026-02-23 21:13:39,433 - preprocessing - INFO - \u2713 
+Loaded 100 preprocessed products from cache
+2026-02-23 21:13:39,433 - __main__ - INFO - \u2713 
+Preprocessing complete
+2026-02-23 21:13:39,433 - __main__ - INFO - 
+[3/6] Loading Embedding Generation Layer...
+2026-02-23 21:13:39,445 - embeddings - INFO - Loading 
+embeddings from cache: data/embeddings.npy
+2026-02-23 21:13:39,469 - embeddings - INFO - \u2713 Loaded 
+embeddings: shape (100, 3072)
+2026-02-23 21:13:39,469 - __main__ - INFO - \u2713 Embedding 
+generation complete
+2026-02-23 21:13:39,469 - __main__ - INFO - 
+[4/6] Loading Vector Store (FAISS)...
+2026-02-23 21:13:39,523 - faiss.loader - INFO - Loading 
+faiss with AVX512 support.
+2026-02-23 21:13:39,523 - faiss.loader - INFO - Could not 
+load library with AVX512 support due to:
+ModuleNotFoundError("No module named 
+'faiss.swigfaiss_avx512'")
+2026-02-23 21:13:39,523 - faiss.loader - INFO - Loading 
+faiss with AVX2 support.
+2026-02-23 21:13:39,736 - faiss.loader - INFO - Successfully 
+loaded faiss with AVX2 support.
+2026-02-23 21:13:39,759 - __main__ - INFO - Loading existing 
+FAISS index...
+2026-02-23 21:13:39,759 - vector_store - INFO - Loading 
+FAISS index from models/faiss_index.bin
+2026-02-23 21:13:39,772 - vector_store - INFO - \u2713 Index 
+loaded successfully
+2026-02-23 21:13:39,772 - vector_store - INFO -   ò Total 
+vectors: 100
+2026-02-23 21:13:39,772 - vector_store - INFO -   ò Index 
+type: Flat
+2026-02-23 21:13:39,772 - __main__ - INFO - \u2713 Vector 
+store ready
+2026-02-23 21:13:39,772 - __main__ - INFO - 
+[5/6] Loading Retrieval Layer...
+2026-02-23 21:13:39,784 - __main__ - INFO - \u2713 Retriever 
+ready
+2026-02-23 21:13:39,784 - __main__ - INFO - 
+[6/6] Loading RAG Generation Layer...
+2026-02-23 21:13:39,803 - rag_pipeline - INFO - \u2713 
+Initialized Gemini LLM: gemini-2.0-flash
+2026-02-23 21:13:39,803 - __main__ - INFO - \u2713 RAG 
+pipeline ready
+2026-02-23 21:13:39,803 - __main__ - INFO - 
+Loading Evaluation Layer...
+2026-02-23 21:13:39,818 - evaluation - INFO - 
+[EVALUATION DATASET]
+2026-02-23 21:13:39,818 - evaluation - INFO - Loaded 5 
+labeled queries with expected categories
+2026-02-23 21:13:39,818 - evaluation - INFO - Relevant 
+product IDs will be matched by category during retrieval
+
+2026-02-23 21:13:39,818 - __main__ - INFO - \u2713 
+Evaluation layer ready
+2026-02-23 21:13:39,818 - __main__ - INFO - 
+=============================================================
+=========
+2026-02-23 21:13:39,818 - __main__ - INFO - \u2713 SYSTEM 
+FULLY INITIALIZED AND READY
+2026-02-23 21:13:39,818 - __main__ - INFO - =================
+=====================================================
+
+2026-02-23 21:13:39,818 - __main__ - INFO - 
+=============================================================
+=========
+2026-02-23 21:13:39,818 - __main__ - INFO - RUNNING SYSTEM 
+EVALUATION
+2026-02-23 21:13:39,818 - __main__ - INFO - =================
+=====================================================
+2026-02-23 21:13:39,818 - evaluation - INFO - 
+============================================================
+2026-02-23 21:13:39,818 - evaluation - INFO - SYSTEM 
+EVALUATION
+2026-02-23 21:13:39,818 - evaluation - INFO - 
+============================================================
+2026-02-23 21:13:39,818 - evaluation - INFO - 
+Running evaluation on 5 test queries...
+2026-02-23 21:13:39,818 - evaluation - INFO - 
+\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u
+2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2
+500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25
+00\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u250
+0\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+2026-02-23 21:13:39,818 - evaluation - INFO - Test 1/5: 
+'Budget running shoes for beginners'
+2026-02-23 21:13:39,818 - evaluation - INFO - \u2500\u2500\u2
+500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25
+00\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u250
+0\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u
+2500\u2500\u2500\u2500\u2500\u2500\u2500
+2026-02-23 21:13:39,819 - retriever - INFO - 
+Retrieving products for query: 'Budget running shoes for 
+beginners'
+2026-02-23 21:13:39,819 - retriever - INFO -   ò Top-K: 5
+2026-02-23 21:13:39,819 - retriever - INFO -   ò Similarity 
+threshold: 0.3
+2026-02-23 21:13:39,819 - retriever - INFO -   ò Domain 
+threshold (OOD detection): 0.65
+2026-02-23 21:13:40,413 - retriever - INFO - Retrieved 5 
+candidates from vector store
+2026-02-23 21:13:40,414 - retriever - INFO - 
+[OOD DETECTION]
+2026-02-23 21:13:40,414 - retriever - INFO -   ò Max 
+similarity: 0.8453
+2026-02-23 21:13:40,414 - retriever - INFO -   ò Avg top-K 
+similarity: 0.7483
+2026-02-23 21:13:40,414 - retriever - INFO -   ò Domain 
+threshold: 0.65
+2026-02-23 21:13:40,415 - retriever - INFO - \u2713 Query 
+appears to be within domain
+2026-02-23 21:13:40,419 - retriever - INFO - Decision: 
+ACCEPT (HIGH confidence, 5 results)
+2026-02-23 21:13:40,419 - retriever - INFO - 
+============================================================
+2026-02-23 21:13:40,419 - retriever - INFO - RETRIEVAL 
+RESULTS WITH EXPLAINABILITY
+2026-02-23 21:13:40,419 - retriever - INFO - 
+============================================================
+2026-02-23 21:13:40,419 - retriever - INFO - Query: 'Budget 
+running shoes for beginners'
+2026-02-23 21:13:40,419 - retriever - INFO - Decision: 
+ACCEPT | Domain Confidence: HIGH
+2026-02-23 21:13:40,419 - retriever - INFO - Results 
+returned: 5 (retrieved 5, after filtering: 5)
+2026-02-23 21:13:40,419 - retriever - INFO - Retrieval time: 
+0.600 seconds
+
+2026-02-23 21:13:40,419 - retriever - INFO - #1. Nike 
+Revolution 6 (ID: P001)
+2026-02-23 21:13:40,419 - retriever - INFO -     Similarity: 
+0.8453 | Price: \u20b94999 | Rating: 4.5\u2b50
+2026-02-23 21:13:40,419 - retriever - INFO -     Category: 
+shoes
+2026-02-23 21:13:40,419 - retriever - INFO -     
+Description: Lightweight running shoe for beginners...
+2026-02-23 21:13:40,419 - retriever - INFO - 
+2026-02-23 21:13:40,419 - retriever - INFO - #2. ASICS 
+Gel-Contend 7 (ID: P003)
+2026-02-23 21:13:40,419 - retriever - INFO -     Similarity: 
+0.7750 | Price: \u20b95499 | Rating: 4.3\u2b50
+2026-02-23 21:13:40,419 - retriever - INFO -     Category: 
+shoes
+2026-02-23 21:13:40,419 - retriever - INFO -     
+Description: Affordable GEL cushioned running shoe...
+2026-02-23 21:13:40,419 - retriever - INFO - 
+2026-02-23 21:13:40,419 - retriever - INFO - #3. IKEA Markus 
+(ID: P018)
+2026-02-23 21:13:40,419 - retriever - INFO -     Similarity: 
+0.7097 | Price: \u20b912999 | Rating: 3.8\u2b50
+2026-02-23 21:13:40,419 - retriever - INFO -     Category: 
+furniture
+2026-02-23 21:13:40,419 - retriever - INFO -     
+Description: Budget office chair...
+2026-02-23 21:13:40,419 - retriever - INFO - 
+2026-02-23 21:13:40,419 - retriever - INFO - #4. JBL Tune 
+750 (ID: P013)
+2026-02-23 21:13:40,419 - retriever - INFO -     Similarity: 
+0.7078 | Price: \u20b98999 | Rating: 4.2\u2b50
+2026-02-23 21:13:40,420 - retriever - INFO -     Category: 
+headphones
+2026-02-23 21:13:40,420 - retriever - INFO -     
+Description: Budget wireless headphones...
+2026-02-23 21:13:40,420 - retriever - INFO - 
+2026-02-23 21:13:40,420 - retriever - INFO - #5. New Balance 
+990v5 (ID: P005)
+2026-02-23 21:13:40,420 - retriever - INFO -     Similarity: 
+0.7038 | Price: \u20b913999 | Rating: 4.7\u2b50
+2026-02-23 21:13:40,420 - retriever - INFO -     Category: 
+shoes
+2026-02-23 21:13:40,420 - retriever - INFO -     
+Description: Premium daily running shoe...
+2026-02-23 21:13:40,420 - retriever - INFO - 
+2026-02-23 21:13:40,420 - retriever - INFO - 
+============================================================
+2026-02-23 21:13:40,425 - evaluation - INFO - 
+[GROUND TRUTH]
+2026-02-23 21:13:40,425 - evaluation - INFO - Expected 
+categories: ['shoes', 'sports']
+2026-02-23 21:13:40,425 - evaluation - INFO - Relevant 
+products in dataset: 15
+2026-02-23 21:13:40,425 - rag_pipeline - INFO - 
+============================================================
+2026-02-23 21:13:40,426 - rag_pipeline - INFO - RAG 
+GENERATION LAYER
+2026-02-23 21:13:40,426 - rag_pipeline - INFO - 
+============================================================
+2026-02-23 21:13:40,426 - rag_pipeline - INFO - Query: 
+'Budget running shoes for beginners'
+2026-02-23 21:13:40,426 - rag_pipeline - INFO - Retrieval 
+Decision: ACCEPT
+2026-02-23 21:13:40,426 - rag_pipeline - INFO - Domain 
+Confidence: HIGH
+2026-02-23 21:13:40,426 - rag_pipeline - INFO - Context 
+products: 5
+2026-02-23 21:13:40,426 - rag_pipeline - INFO - \u2713 
+Decision ACCEPTED - Proceeding with LLM generation
+2026-02-23 21:13:40,426 - rag_pipeline - INFO - 
+Context window size: 792 characters
+2026-02-23 21:13:40,426 - rag_pipeline - INFO - Calling LLM 
+for generation...
+2026-02-23 21:13:43,010 - rag_pipeline - INFO - \u2713 LLM 
+generation successful
+2026-02-23 21:13:43,011 - rag_pipeline - INFO - 
+============================================================
+
+2026-02-23 21:13:43,018 - evaluation - ERROR - Error 
+evaluating query: 'in <string>' requires string as left 
+operand, not numpy.int64
+2026-02-23 21:13:43,018 - evaluation - INFO - 
+\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u
+2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2
+500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25
+00\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u250
+0\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+2026-02-23 21:13:43,019 - evaluation - INFO - Test 2/5: 
+'Laptop suitable for video editing under 80k'
+2026-02-23 21:13:43,019 - evaluation - INFO - \u2500\u2500\u2
+500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25
+00\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u250
+0\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u
+2500\u2500\u2500\u2500\u2500\u2500\u2500
+2026-02-23 21:13:43,019 - retriever - INFO - 
+Retrieving products for query: 'Laptop suitable for video 
+editing under 80k'
+2026-02-23 21:13:43,019 - retriever - INFO -   ò Top-K: 5
+2026-02-23 21:13:43,019 - retriever - INFO -   ò Similarity 
+threshold: 0.3
+2026-02-23 21:13:43,019 - retriever - INFO -   ò Domain 
+threshold (OOD detection): 0.65
+2026-02-23 21:13:43,481 - retriever - INFO - Retrieved 5 
+candidates from vector store
+2026-02-23 21:13:43,482 - retriever - INFO - 
+[OOD DETECTION]
+2026-02-23 21:13:43,482 - retriever - INFO -   ò Max 
+similarity: 0.7306
+2026-02-23 21:13:43,482 - retriever - INFO -   ò Avg top-K 
+similarity: 0.6738
+2026-02-23 21:13:43,483 - retriever - INFO -   ò Domain 
+threshold: 0.65
+2026-02-23 21:13:43,483 - retriever - INFO - \u2713 Query 
+appears to be within domain
+2026-02-23 21:13:43,484 - retriever - INFO - Decision: 
+ACCEPT (HIGH confidence, 5 results)
+2026-02-23 21:13:43,484 - retriever - INFO - 
+============================================================
+2026-02-23 21:13:43,484 - retriever - INFO - RETRIEVAL 
+RESULTS WITH EXPLAINABILITY
+2026-02-23 21:13:43,484 - retriever - INFO - 
+============================================================
+2026-02-23 21:13:43,484 - retriever - INFO - Query: 'Laptop 
+suitable for video editing under 80k'
+2026-02-23 21:13:43,484 - retriever - INFO - Decision: 
+ACCEPT | Domain Confidence: HIGH
+2026-02-23 21:13:43,484 - retriever - INFO - Results 
+returned: 5 (retrieved 5, after filtering: 5)
+2026-02-23 21:13:43,484 - retriever - INFO - Retrieval time: 
+0.465 seconds
+
+2026-02-23 21:13:43,484 - retriever - INFO - #1. HP Pavilion 
+Gaming 15 (ID: P010)
+2026-02-23 21:13:43,484 - retriever - INFO -     Similarity: 
+0.7306 | Price: \u20b974999 | Rating: 4.4\u2b50
+2026-02-23 21:13:43,484 - retriever - INFO -     Category: 
+laptops
+2026-02-23 21:13:43,484 - retriever - INFO -     
+Description: Gaming and editing laptop...
+2026-02-23 21:13:43,484 - retriever - INFO - 
+2026-02-23 21:13:43,484 - retriever - INFO - #2. Apple 
+MacBook Pro 14 M2 (ID: P045)
+2026-02-23 21:13:43,484 - retriever - INFO -     Similarity: 
+0.6717 | Price: \u20b9199900 | Rating: 4.9\u2b50
+2026-02-23 21:13:43,484 - retriever - INFO -     Category: 
+laptops
+2026-02-23 21:13:43,484 - retriever - INFO -     
+Description: High-performance laptop for creative 
+professionals...
+2026-02-23 21:13:43,484 - retriever - INFO - 
+2026-02-23 21:13:43,484 - retriever - INFO - #3. Acer Swift 
+3 (ID: P049)
+2026-02-23 21:13:43,485 - retriever - INFO -     Similarity: 
+0.6623 | Price: \u20b955000 | Rating: 4.2\u2b50
+2026-02-23 21:13:43,485 - retriever - INFO -     Category: 
+laptops
+2026-02-23 21:13:43,485 - retriever - INFO -     
+Description: Affordable thin and light laptop for everyday 
+use...
+2026-02-23 21:13:43,485 - retriever - INFO - 
+2026-02-23 21:13:43,485 - retriever - INFO - #4. Lenovo 
+ThinkBook 14 (ID: P009)
+2026-02-23 21:13:43,485 - retriever - INFO -     Similarity: 
+0.6534 | Price: \u20b949999 | Rating: 4.0\u2b50
+2026-02-23 21:13:43,485 - retriever - INFO -     Category: 
+laptops
+2026-02-23 21:13:43,485 - retriever - INFO -     
+Description: Business laptop for daily tasks...
+2026-02-23 21:13:43,485 - retriever - INFO - 
+2026-02-23 21:13:43,485 - retriever - INFO - #5. ASUS 
+VivoBook 15 (ID: P008)
+2026-02-23 21:13:43,485 - retriever - INFO -     Similarity: 
+0.6512 | Price: \u20b944999 | Rating: 4.1\u2b50
+2026-02-23 21:13:43,485 - retriever - INFO -     Category: 
+laptops
+2026-02-23 21:13:43,485 - retriever - INFO -     
+Description: Budget laptop for students...
+2026-02-23 21:13:43,485 - retriever - INFO - 
+2026-02-23 21:13:43,485 - retriever - INFO - 
+============================================================
+2026-02-23 21:13:43,498 - evaluation - INFO - 
+[GROUND TRUTH]
+2026-02-23 21:13:43,500 - evaluation - INFO - Expected 
+categories: ['laptops', 'electronics']
+2026-02-23 21:13:43,500 - evaluation - INFO - Relevant 
+products in dataset: 15
+2026-02-23 21:13:43,500 - rag_pipeline - INFO - 
+============================================================
+2026-02-23 21:13:43,500 - rag_pipeline - INFO - RAG 
+GENERATION LAYER
+2026-02-23 21:13:43,500 - rag_pipeline - INFO - 
+============================================================
+2026-02-23 21:13:43,500 - rag_pipeline - INFO - Query: 
+'Laptop suitable for video editing under 80k'
+2026-02-23 21:13:43,500 - rag_pipeline - INFO - Retrieval 
+Decision: ACCEPT
+2026-02-23 21:13:43,500 - rag_pipeline - INFO - Domain 
+Confidence: HIGH
+2026-02-23 21:13:43,501 - rag_pipeline - INFO - Context 
+products: 5
+2026-02-23 21:13:43,501 - rag_pipeline - INFO - \u2713 
+Decision ACCEPTED - Proceeding with LLM generation
+2026-02-23 21:13:43,501 - rag_pipeline - INFO - 
+Context window size: 847 characters
+2026-02-23 21:13:43,501 - rag_pipeline - INFO - Calling LLM 
+for generation...
+2026-02-23 21:13:45,003 - rag_pipeline - INFO - \u2713 LLM 
+generation successful
+2026-02-23 21:13:45,003 - rag_pipeline - INFO - 
+============================================================
+
+2026-02-23 21:13:45,007 - evaluation - ERROR - Error 
+evaluating query: 'in <string>' requires string as left 
+operand, not numpy.int64
+2026-02-23 21:13:45,007 - evaluation - INFO - 
+\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u
+2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2
+500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25
+00\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u250
+0\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+2026-02-23 21:13:45,007 - evaluation - INFO - Test 3/5: 
+'Wireless headphones with strong bass and long battery life'
+2026-02-23 21:13:45,007 - evaluation - INFO - \u2500\u2500\u2
+500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25
+00\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u250
+0\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u
+2500\u2500\u2500\u2500\u2500\u2500\u2500
+2026-02-23 21:13:45,008 - retriever - INFO - 
+Retrieving products for query: 'Wireless headphones with 
+strong bass and long battery life'
+2026-02-23 21:13:45,008 - retriever - INFO -   ò Top-K: 5
+2026-02-23 21:13:45,008 - retriever - INFO -   ò Similarity 
+threshold: 0.3
+2026-02-23 21:13:45,008 - retriever - INFO -   ò Domain 
+threshold (OOD detection): 0.65
+2026-02-23 21:13:45,443 - retriever - INFO - Retrieved 5 
+candidates from vector store
+2026-02-23 21:13:45,443 - retriever - INFO - 
+[OOD DETECTION]
+2026-02-23 21:13:45,443 - retriever - INFO -   ò Max 
+similarity: 0.8226
+2026-02-23 21:13:45,443 - retriever - INFO -   ò Avg top-K 
+similarity: 0.7531
+2026-02-23 21:13:45,443 - retriever - INFO -   ò Domain 
+threshold: 0.65
+2026-02-23 21:13:45,443 - retriever - INFO - \u2713 Query 
+appears to be within domain
+2026-02-23 21:13:45,444 - retriever - INFO - Decision: 
+ACCEPT (HIGH confidence, 5 results)
+2026-02-23 21:13:45,444 - retriever - INFO - 
+============================================================
+2026-02-23 21:13:45,445 - retriever - INFO - RETRIEVAL 
+RESULTS WITH EXPLAINABILITY
+2026-02-23 21:13:45,445 - retriever - INFO - 
+============================================================
+2026-02-23 21:13:45,445 - retriever - INFO - Query: 
+'Wireless headphones with strong bass and long battery life'
+2026-02-23 21:13:45,445 - retriever - INFO - Decision: 
+ACCEPT | Domain Confidence: HIGH
+2026-02-23 21:13:45,445 - retriever - INFO - Results 
+returned: 5 (retrieved 5, after filtering: 5)
+2026-02-23 21:13:45,445 - retriever - INFO - Retrieval time: 
+0.436 seconds
+
+2026-02-23 21:13:45,445 - retriever - INFO - #1. Skullcandy 
+Crusher Evo (ID: P015)
+2026-02-23 21:13:45,445 - retriever - INFO -     Similarity: 
+0.8226 | Price: \u20b913999 | Rating: 4.5\u2b50
+2026-02-23 21:13:45,445 - retriever - INFO -     Category: 
+headphones
+2026-02-23 21:13:45,445 - retriever - INFO -     
+Description: Bass heavy wireless headphones...
+2026-02-23 21:13:45,445 - retriever - INFO - 
+2026-02-23 21:13:45,445 - retriever - INFO - #2. JBL Tune 
+750 (ID: P013)
+2026-02-23 21:13:45,445 - retriever - INFO -     Similarity: 
+0.7641 | Price: \u20b98999 | Rating: 4.2\u2b50
+2026-02-23 21:13:45,445 - retriever - INFO -     Category: 
+headphones
+2026-02-23 21:13:45,445 - retriever - INFO -     
+Description: Budget wireless headphones...
+2026-02-23 21:13:45,445 - retriever - INFO - 
+2026-02-23 21:13:45,445 - retriever - INFO - #3. Sennheiser 
+Momentum 4 (ID: P055)
+2026-02-23 21:13:45,445 - retriever - INFO -     Similarity: 
+0.7430 | Price: \u20b929990 | Rating: 4.7\u2b50
+2026-02-23 21:13:45,445 - retriever - INFO -     Category: 
+headphones
+2026-02-23 21:13:45,445 - retriever - INFO -     
+Description: Exceptional audio quality wireless headphones...
+2026-02-23 21:13:45,445 - retriever - INFO - 
+2026-02-23 21:13:45,445 - retriever - INFO - #4. Sony 
+WH-1000XM5 (ID: P011)
+2026-02-23 21:13:45,445 - retriever - INFO -     Similarity: 
+0.7381 | Price: \u20b939999 | Rating: 4.9\u2b50
+2026-02-23 21:13:45,445 - retriever - INFO -     Category: 
+headphones
+2026-02-23 21:13:45,445 - retriever - INFO -     
+Description: Premium ANC wireless headphones...
+2026-02-23 21:13:45,445 - retriever - INFO - 
+2026-02-23 21:13:45,446 - retriever - INFO - #5. Fitbit 
+Versa 4 (ID: P083)
+2026-02-23 21:13:45,446 - retriever - INFO -     Similarity: 
+0.6976 | Price: \u20b917999 | Rating: 4.2\u2b50
+2026-02-23 21:13:45,446 - retriever - INFO -     Category: 
+smartwatches
+2026-02-23 21:13:45,446 - retriever - INFO -     
+Description: Fitness focused smartwatch with long battery...
+2026-02-23 21:13:45,446 - retriever - INFO - 
+2026-02-23 21:13:45,446 - retriever - INFO - 
+============================================================
+2026-02-23 21:13:45,449 - evaluation - INFO - 
+[GROUND TRUTH]
+2026-02-23 21:13:45,449 - evaluation - INFO - Expected 
+categories: ['headphones', 'audio']
+2026-02-23 21:13:45,449 - evaluation - INFO - Relevant 
+products in dataset: 15
+2026-02-23 21:13:45,449 - rag_pipeline - INFO - 
+============================================================
+2026-02-23 21:13:45,449 - rag_pipeline - INFO - RAG 
+GENERATION LAYER
+2026-02-23 21:13:45,449 - rag_pipeline - INFO - 
+============================================================
+2026-02-23 21:13:45,449 - rag_pipeline - INFO - Query: 
+'Wireless headphones with strong bass and long battery life'
+2026-02-23 21:13:45,449 - rag_pipeline - INFO - Retrieval 
+Decision: ACCEPT
+2026-02-23 21:13:45,449 - rag_pipeline - INFO - Domain 
+Confidence: HIGH
+2026-02-23 21:13:45,449 - rag_pipeline - INFO - Context 
+products: 5
+2026-02-23 21:13:45,449 - rag_pipeline - INFO - \u2713 
+Decision ACCEPTED - Proceeding with LLM generation
+2026-02-23 21:13:45,449 - rag_pipeline - INFO - 
+Context window size: 850 characters
+2026-02-23 21:13:45,449 - rag_pipeline - INFO - Calling LLM 
+for generation...
+2026-02-23 21:13:46,659 - rag_pipeline - INFO - \u2713 LLM 
+generation successful
+2026-02-23 21:13:46,659 - rag_pipeline - INFO - 
+============================================================
+
+2026-02-23 21:13:46,663 - evaluation - ERROR - Error 
+evaluating query: 'in <string>' requires string as left 
+operand, not numpy.int64
+2026-02-23 21:13:46,663 - evaluation - INFO - 
+\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u
+2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2
+500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25
+00\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u250
+0\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+2026-02-23 21:13:46,663 - evaluation - INFO - Test 4/5: 
+'Comfortable office chair for long hours'
+2026-02-23 21:13:46,663 - evaluation - INFO - \u2500\u2500\u2
+500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25
+00\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u250
+0\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u
+2500\u2500\u2500\u2500\u2500\u2500\u2500
+2026-02-23 21:13:46,663 - retriever - INFO - 
+Retrieving products for query: 'Comfortable office chair for 
+long hours'
+2026-02-23 21:13:46,663 - retriever - INFO -   ò Top-K: 5
+2026-02-23 21:13:46,663 - retriever - INFO -   ò Similarity 
+threshold: 0.3
+2026-02-23 21:13:46,664 - retriever - INFO -   ò Domain 
+threshold (OOD detection): 0.65
+2026-02-23 21:13:47,151 - retriever - INFO - Retrieved 5 
+candidates from vector store
+2026-02-23 21:13:47,151 - retriever - INFO - 
+[OOD DETECTION]
+2026-02-23 21:13:47,151 - retriever - INFO -   ò Max 
+similarity: 0.7332
+2026-02-23 21:13:47,151 - retriever - INFO -   ò Avg top-K 
+similarity: 0.7233
+2026-02-23 21:13:47,151 - retriever - INFO -   ò Domain 
+threshold: 0.65
+2026-02-23 21:13:47,151 - retriever - INFO - \u2713 Query 
+appears to be within domain
+2026-02-23 21:13:47,152 - retriever - INFO - Decision: 
+ACCEPT (HIGH confidence, 5 results)
+2026-02-23 21:13:47,152 - retriever - INFO - 
+============================================================
+2026-02-23 21:13:47,152 - retriever - INFO - RETRIEVAL 
+RESULTS WITH EXPLAINABILITY
+2026-02-23 21:13:47,152 - retriever - INFO - 
+============================================================
+2026-02-23 21:13:47,152 - retriever - INFO - Query: 
+'Comfortable office chair for long hours'
+2026-02-23 21:13:47,152 - retriever - INFO - Decision: 
+ACCEPT | Domain Confidence: HIGH
+2026-02-23 21:13:47,152 - retriever - INFO - Results 
+returned: 5 (retrieved 5, after filtering: 5)
+2026-02-23 21:13:47,152 - retriever - INFO - Retrieval time: 
+0.489 seconds
+
+2026-02-23 21:13:47,152 - retriever - INFO - #1. Herman 
+Miller Aeron (ID: P016)
+2026-02-23 21:13:47,152 - retriever - INFO -     Similarity: 
+0.7332 | Price: \u20b9128000 | Rating: 4.9\u2b50
+2026-02-23 21:13:47,152 - retriever - INFO -     Category: 
+furniture
+2026-02-23 21:13:47,152 - retriever - INFO -     
+Description: Ergonomic office chair...
+2026-02-23 21:13:47,152 - retriever - INFO - 
+2026-02-23 21:13:47,152 - retriever - INFO - #2. IKEA Markus 
+(ID: P018)
+2026-02-23 21:13:47,152 - retriever - INFO -     Similarity: 
+0.7282 | Price: \u20b912999 | Rating: 3.8\u2b50
+2026-02-23 21:13:47,153 - retriever - INFO -     Category: 
+furniture
+2026-02-23 21:13:47,153 - retriever - INFO -     
+Description: Budget office chair...
+2026-02-23 21:13:47,153 - retriever - INFO - 
+2026-02-23 21:13:47,153 - retriever - INFO - #3. Branch 
+Ergonomic Chair (ID: P067)
+2026-02-23 21:13:47,153 - retriever - INFO -     Similarity: 
+0.7272 | Price: \u20b925000 | Rating: 4.5\u2b50
+2026-02-23 21:13:47,153 - retriever - INFO -     Category: 
+furniture
+2026-02-23 21:13:47,153 - retriever - INFO -     
+Description: Sleek and highly adjustable office chair...
+2026-02-23 21:13:47,153 - retriever - INFO - 
+2026-02-23 21:13:47,153 - retriever - INFO - #4. Steelcase 
+Gesture (ID: P072)
+2026-02-23 21:13:47,153 - retriever - INFO -     Similarity: 
+0.7219 | Price: \u20b9140000 | Rating: 4.9\u2b50
+2026-02-23 21:13:47,153 - retriever - INFO -     Category: 
+furniture
+2026-02-23 21:13:47,153 - retriever - INFO -     
+Description: Ultimate ergonomic chair for various sitting 
+postures...
+2026-02-23 21:13:47,153 - retriever - INFO - 
+2026-02-23 21:13:47,153 - retriever - INFO - #5. Noblechairs 
+Hero (ID: P074)
+2026-02-23 21:13:47,153 - retriever - INFO -     Similarity: 
+0.7057 | Price: \u20b938000 | Rating: 4.5\u2b50
+2026-02-23 21:13:47,153 - retriever - INFO -     Category: 
+furniture
+2026-02-23 21:13:47,153 - retriever - INFO -     
+Description: Spacious and supportive premium chair...
+2026-02-23 21:13:47,153 - retriever - INFO - 
+2026-02-23 21:13:47,153 - retriever - INFO - 
+============================================================
+2026-02-23 21:13:47,156 - evaluation - INFO - 
+[GROUND TRUTH]
+2026-02-23 21:13:47,156 - evaluation - INFO - Expected 
+categories: ['furniture', 'office']
+2026-02-23 21:13:47,156 - evaluation - INFO - Relevant 
+products in dataset: 15
+2026-02-23 21:13:47,156 - rag_pipeline - INFO - 
+============================================================
+2026-02-23 21:13:47,156 - rag_pipeline - INFO - RAG 
+GENERATION LAYER
+2026-02-23 21:13:47,156 - rag_pipeline - INFO - 
+============================================================
+2026-02-23 21:13:47,156 - rag_pipeline - INFO - Query: 
+'Comfortable office chair for long hours'
+2026-02-23 21:13:47,156 - rag_pipeline - INFO - Retrieval 
+Decision: ACCEPT
+2026-02-23 21:13:47,156 - rag_pipeline - INFO - Domain 
+Confidence: HIGH
+2026-02-23 21:13:47,157 - rag_pipeline - INFO - Context 
+products: 5
+2026-02-23 21:13:47,158 - rag_pipeline - INFO - \u2713 
+Decision ACCEPTED - Proceeding with LLM generation
+2026-02-23 21:13:47,159 - rag_pipeline - INFO - 
+Context window size: 842 characters
+2026-02-23 21:13:47,159 - rag_pipeline - INFO - Calling LLM 
+for generation...
+2026-02-23 21:13:49,261 - rag_pipeline - INFO - \u2713 LLM 
+generation successful
+2026-02-23 21:13:49,261 - rag_pipeline - INFO - 
+============================================================
+
+2026-02-23 21:13:49,264 - evaluation - ERROR - Error 
+evaluating query: 'in <string>' requires string as left 
+operand, not numpy.int64
+2026-02-23 21:13:49,264 - evaluation - INFO - 
+\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u
+2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2
+500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25
+00\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u250
+0\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+2026-02-23 21:13:49,264 - evaluation - INFO - Test 5/5: 
+'Yoga mat for home workouts'
+2026-02-23 21:13:49,264 - evaluation - INFO - \u2500\u2500\u2
+500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25
+00\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u250
+0\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u
+2500\u2500\u2500\u2500\u2500\u2500\u2500
+2026-02-23 21:13:49,264 - retriever - INFO - 
+Retrieving products for query: 'Yoga mat for home workouts'
+2026-02-23 21:13:49,264 - retriever - INFO -   ò Top-K: 5
+2026-02-23 21:13:49,264 - retriever - INFO -   ò Similarity 
+threshold: 0.3
+2026-02-23 21:13:49,264 - retriever - INFO -   ò Domain 
+threshold (OOD detection): 0.65
+2026-02-23 21:13:49,667 - retriever - INFO - Retrieved 5 
+candidates from vector store
+2026-02-23 21:13:49,667 - retriever - INFO - 
+[OOD DETECTION]
+2026-02-23 21:13:49,667 - retriever - INFO -   ò Max 
+similarity: 0.7350
+2026-02-23 21:13:49,667 - retriever - INFO -   ò Avg top-K 
+similarity: 0.6940
+2026-02-23 21:13:49,667 - retriever - INFO -   ò Domain 
+threshold: 0.65
+2026-02-23 21:13:49,667 - retriever - INFO - \u2713 Query 
+appears to be within domain
+2026-02-23 21:13:49,668 - retriever - INFO - Decision: 
+ACCEPT (HIGH confidence, 5 results)
+2026-02-23 21:13:49,668 - retriever - INFO - 
+============================================================
+2026-02-23 21:13:49,668 - retriever - INFO - RETRIEVAL 
+RESULTS WITH EXPLAINABILITY
+2026-02-23 21:13:49,668 - retriever - INFO - 
+============================================================
+2026-02-23 21:13:49,668 - retriever - INFO - Query: 'Yoga 
+mat for home workouts'
+2026-02-23 21:13:49,668 - retriever - INFO - Decision: 
+ACCEPT | Domain Confidence: HIGH
+2026-02-23 21:13:49,668 - retriever - INFO - Results 
+returned: 5 (retrieved 5, after filtering: 5)
+2026-02-23 21:13:49,668 - retriever - INFO - Retrieval time: 
+0.403 seconds
+
+2026-02-23 21:13:49,668 - retriever - INFO - #1. Hexa Yoga 
+Mat (ID: P021)
+2026-02-23 21:13:49,668 - retriever - INFO -     Similarity: 
+0.7350 | Price: \u20b92999 | Rating: 4.6\u2b50
+2026-02-23 21:13:49,668 - retriever - INFO -     Category: 
+fitness
+2026-02-23 21:13:49,668 - retriever - INFO -     
+Description: Non-slip yoga mat...
+2026-02-23 21:13:49,668 - retriever - INFO - 
+2026-02-23 21:13:49,668 - retriever - INFO - #2. Lululemon 
+Reversible Mat (ID: P075)
+2026-02-23 21:13:49,668 - retriever - INFO -     Similarity: 
+0.7225 | Price: \u20b96999 | Rating: 4.7\u2b50
+2026-02-23 21:13:49,669 - retriever - INFO -     Category: 
+fitness
+2026-02-23 21:13:49,669 - retriever - INFO -     
+Description: 5mm thick premium yoga mat...
+2026-02-23 21:13:49,669 - retriever - INFO - 
+2026-02-23 21:13:49,669 - retriever - INFO - #3. Gaiam 
+Premium Print Yoga Mat (ID: P022)
+2026-02-23 21:13:49,669 - retriever - INFO -     Similarity: 
+0.7157 | Price: \u20b93499 | Rating: 4.6\u2b50
+2026-02-23 21:13:49,669 - retriever - INFO -     Category: 
+fitness
+2026-02-23 21:13:49,669 - retriever - INFO -     
+Description: Extra thick printed yoga mat...
+2026-02-23 21:13:49,669 - retriever - INFO - 
+2026-02-23 21:13:49,669 - retriever - INFO - #4. Bowflex 
+SelectTech 552 (ID: P032)
+2026-02-23 21:13:49,669 - retriever - INFO -     Similarity: 
+0.6804 | Price: \u20b934999 | Rating: 4.8\u2b50
+2026-02-23 21:13:49,669 - retriever - INFO -     Category: 
+fitness
+2026-02-23 21:13:49,669 - retriever - INFO -     
+Description: Adjustable dumbbells for home gym...
+2026-02-23 21:13:49,669 - retriever - INFO - 
+2026-02-23 21:13:49,669 - retriever - INFO - #5. Manduka PRO 
+Yoga Mat (ID: P078)
+2026-02-23 21:13:49,669 - retriever - INFO -     Similarity: 
+0.6166 | Price: \u20b911000 | Rating: 4.8\u2b50
+2026-02-23 21:13:49,669 - retriever - INFO -     Category: 
+fitness
+2026-02-23 21:13:49,669 - retriever - INFO -     
+Description: Ultra-dense and spacious lifetime guarantee 
+mat...
+2026-02-23 21:13:49,669 - retriever - INFO - 
+2026-02-23 21:13:49,669 - retriever - INFO - 
+============================================================
+2026-02-23 21:13:49,672 - evaluation - INFO - 
+[GROUND TRUTH]
+2026-02-23 21:13:49,672 - evaluation - INFO - Expected 
+categories: ['fitness', 'sports']
+2026-02-23 21:13:49,672 - evaluation - INFO - Relevant 
+products in dataset: 16
+2026-02-23 21:13:49,672 - rag_pipeline - INFO - 
+============================================================
+2026-02-23 21:13:49,672 - rag_pipeline - INFO - RAG 
+GENERATION LAYER
+2026-02-23 21:13:49,672 - rag_pipeline - INFO - 
+============================================================
+2026-02-23 21:13:49,672 - rag_pipeline - INFO - Query: 'Yoga 
+mat for home workouts'
+2026-02-23 21:13:49,672 - rag_pipeline - INFO - Retrieval 
+Decision: ACCEPT
+2026-02-23 21:13:49,672 - rag_pipeline - INFO - Domain 
+Confidence: HIGH
+2026-02-23 21:13:49,672 - rag_pipeline - INFO - Context 
+products: 5
+2026-02-23 21:13:49,672 - rag_pipeline - INFO - \u2713 
+Decision ACCEPTED - Proceeding with LLM generation
+2026-02-23 21:13:49,672 - rag_pipeline - INFO - 
+Context window size: 829 characters
+2026-02-23 21:13:49,672 - rag_pipeline - INFO - Calling LLM 
+for generation...
+2026-02-23 21:13:51,678 - rag_pipeline - INFO - \u2713 LLM 
+generation successful
+2026-02-23 21:13:51,678 - rag_pipeline - INFO - 
+============================================================
+
+2026-02-23 21:13:51,682 - evaluation - ERROR - Error 
+evaluating query: 'in <string>' requires string as left 
+operand, not numpy.int64
+2026-02-23 21:13:51,682 - evaluation - INFO - 
+============================================================
+2026-02-23 21:13:51,682 - evaluation - INFO - EVALUATION 
+SUMMARY
+2026-02-23 21:13:51,682 - evaluation - INFO - 
+============================================================
+2026-02-23 21:13:51,682 - evaluation - INFO - {
+  "total_tests": 5,
+  "hallucinations_detected": 0,
+  "hallucination_rate": "0.0%",
+  "average_relevance_score": "0.0%",
+  "average_explainability_score": "0.0%",
+  "average_products_retrieved": "0.0",
+  "retrieval_metrics": {
+    "average_recall_at_k": "0.0%",
+    "explanation_recall": "Of all relevant items in the 
+dataset, what % did we retrieve in top-K? Higher is better.",
+    "average_mrr": "0.000",
+    "explanation_mrr": "On average, at what position was the 
+first relevant item? Higher is better (1.0 = rank 1)."
+  },
+  "safety_metrics": {
+    "ood_queries_detected": 0,
+    "queries_rejected": 0,
+    "acceptance_rate": "100.0%",
+    "explanation": "Rejected queries are marked OOD or 
+low-confidence to prevent hallucinations"
+  },
+  "status": "\u26a0\ufe0f NEEDS IMPROVEMENT - Low relevance 
+scores",
+  "recommendations_for_improvement": [
+    "Low relevance: Consider refining similarity threshold 
+or embedding model",
+    "Partial relevance issues: Expand product dataset or 
+improve descriptions",
+    "Low Recall@K: Increasing top_k or lowering 
+similarity_threshold may help retrieve more relevant items",
+    "Low MRR: First results are ranked poorly. Consider 
+using a re-ranker or improving embedding model",
+    "Increase product dataset size for better coverage",
+    "Add more diverse product descriptions (e.g., pros/cons, 
+use cases)",
+    "Monitor LLM responses for consistent hallucination 
+patterns",
+    "Regularly collect user feedback to refine the 
+evaluation dataset and track metrics over time"
+  ],
+  "detailed_results": [
+    {
+      "query": "Budget running shoes for beginners",
+      "error": "'in <string>' requires string as left 
+operand, not numpy.int64",
+      "hallucination_detected": false
+    },
+    {
+      "query": "Laptop suitable for video editing under 80k",
+      "error": "'in <string>' requires string as left 
+operand, not numpy.int64",
+      "hallucination_detected": false
+    },
+    {
+      "query": "Wireless headphones with strong bass and 
+long battery life",
+      "error": "'in <string>' requires string as left 
+operand, not numpy.int64",
+      "hallucination_detected": false
+    },
+    {
+      "query": "Comfortable office chair for long hours",
+      "error": "'in <string>' requires string as left 
+operand, not numpy.int64",
+      "hallucination_detected": false
+    },
+    {
+      "query": "Yoga mat for home workouts",
+      "error": "'in <string>' requires string as left 
+operand, not numpy.int64",
+      "hallucination_detected": false
+    }
+  ]
+}
+2026-02-23 21:13:51,683 - evaluation - INFO - 
+\u2713 Results saved to evaluation_results.json
+2026-02-23 21:13:51,683 - evaluation - INFO - 
+============================================================
+
+2026-02-23 21:13:51,684 - __main__ - INFO - 
+=============================================================
+=========
+2026-02-23 21:13:51,684 - __main__ - INFO - EVALUATION 
+COMPLETE
+2026-02-23 21:13:51,684 - __main__ - INFO - =================
+=====================================================
+2026-02-23 21:13:51,684 - __main__ - INFO - \u2713 No 
+hallucinations detected
+2026-02-23 21:13:51,684 - __main__ - INFO - \u2713 Average 
+relevance: 0.0%
+2026-02-23 21:13:51,684 - __main__ - INFO - \u2713 Average 
+explainability: 0.0%

@@ -39,23 +39,10 @@ logger = logging.getLogger(__name__)
 
 
 class VectorStoreLayer:
-    """
-    FAISS-based vector store for efficient similarity search.
-    
-    Design Principles:
-    - Normalized vectors (for cosine similarity via dot product)
-    - Persistent storage (reproducible results)
-    - Metadata tracking (product_id → embedding index)
-    - Production-ready (error handling, logging)
-    """
+    """FAISS-based vector store for efficient similarity search."""
     
     def __init__(self, config_path: str = "config/config.yaml"):
-        """
-        Initialize vector store.
-        
-        Args:
-            config_path: Path to configuration file
-        """
+        """Initialize vector store."""
         self.config = self._load_config(config_path)
         self.vector_config = self.config.get("vector_store", {})
         self.index = None
@@ -76,16 +63,9 @@ class VectorStoreLayer:
         """
         Build FAISS index from embeddings.
         
-        Strategy:
-        1. Validate embeddings (must be normalized)
-        2. Create appropriate FAISS index
-        3. Add embeddings to index
-        4. Create metadata mapping
-        5. Save to disk
-        
         Args:
             embeddings: Array of shape (n_products, embedding_dim)
-            product_ids: Array of product IDs corresponding to embeddings
+            product_ids: Array of product IDs
         """
         logger.info("\n" + "="*60)
         logger.info("VECTOR STORE BUILDING")
@@ -104,7 +84,6 @@ class VectorStoreLayer:
                 f"configured dimension {self.dimension}"
             )
         
-        # Validate normalization
         norms = np.linalg.norm(embeddings, axis=1)
         if not np.allclose(norms, 1.0, atol=1e-5):
             logger.warning("Embeddings not normalized! Normalizing now...")
@@ -115,7 +94,6 @@ class VectorStoreLayer:
         logger.info(f"  • Embedding dimension: {embeddings.shape[1]}")
         logger.info(f"  • Memory: {embeddings.nbytes / 1024 / 1024:.1f} MB")
         
-        # Create index
         if self.index_type == "Flat":
             self._build_flat_index(embeddings)
         elif self.index_type == "IVF":
@@ -123,33 +101,21 @@ class VectorStoreLayer:
         else:
             raise ValueError(f"Unknown index type: {self.index_type}")
         
-        # Create metadata mapping
         logger.info("\nCreating metadata mapping...")
         self.metadata = {
-            "product_ids": product_ids.tolist(),
+            "product_ids": [str(pid) for pid in product_ids],
             "index_type": self.index_type,
             "dimension": self.dimension,
             "total_vectors": len(embeddings)
         }
         logger.info(f"✓ Metadata: {len(product_ids)} products mapped")
         
-        # Persist
         self._save_index()
         
         logger.info("="*60 + "\n")
     
     def _build_flat_index(self, embeddings: np.ndarray) -> None:
-        """
-        Build exact KNN index using FAISS Flat.
-        
-        IndexFlatIP: Inner Product (dot product) distance
-        - Perfect for normalized vectors (dot product = cosine similarity)
-        - O(n) search complexity but very fast in practice
-        - ~0.1ms per query for 1M vectors on CPU
-        
-        Args:
-            embeddings: Normalized embedding matrix
-        """
+        """Build exact KNN index using FAISS Flat (IndexFlatIP)."""
         logger.info("Creating IndexFlatIP (exact inner product search)...")
         
         embeddings_float32 = embeddings.astype(np.float32)
@@ -162,40 +128,25 @@ class VectorStoreLayer:
         logger.info(f"  • Complexity: O(n) per query")
     
     def _build_ivf_index(self, embeddings: np.ndarray) -> None:
-        """
-        Build approximate KNN index using FAISS IVF.
-        
-        IndexIVFFlat: Inverted File with flat quantizer
-        - Approximate search: O(log n) complexity
-        - Trades small accuracy loss for massive speedup
-        - Good for millions of vectors
-        
-        Args:
-            embeddings: Normalized embedding matrix
-        """
+        """Build approximate KNN index using FAISS IVF (faster for large datasets)."""
         logger.info("Creating IndexIVFFlat (approximate search)...")
         
         embeddings_float32 = embeddings.astype(np.float32)
         
-        # Parameters
-        nlist = self.vector_config.get("nlist", 100)  # Number of clusters
-        nprobe = self.vector_config.get("nprobe", 10)  # Cells to search
+        nlist = self.vector_config.get("nlist", 100)
+        nprobe = self.vector_config.get("nprobe", 10)
         
         logger.info(f"  • nlist (clusters): {nlist}")
         logger.info(f"  • nprobe (search cells): {nprobe}")
         
-        # Create quantizer and index
         quantizer = faiss.IndexFlatIP(self.dimension)
         self.index = faiss.IndexIVFFlat(quantizer, self.dimension, nlist, faiss.METRIC_INNER_PRODUCT)
         
-        # Train on embeddings
         logger.info("Training index (creating clusters)...")
         self.index.train(embeddings_float32)
         
-        # Add vectors
         self.index.add(embeddings_float32)
         
-        # Set search parameters
         self.index.nprobe = nprobe
         
         logger.info(f"✓ Index built successfully")
@@ -207,15 +158,12 @@ class VectorStoreLayer:
         index_path = self.vector_config.get("index_path", "models/faiss_index.bin")
         metadata_path = self.vector_config.get("metadata_path", "models/metadata.pkl")
         
-        # Create directories
         Path(index_path).parent.mkdir(parents=True, exist_ok=True)
         Path(metadata_path).parent.mkdir(parents=True, exist_ok=True)
         
-        # Save index
         logger.info(f"Saving FAISS index to {index_path}")
         faiss.write_index(self.index, index_path)
         
-        # Save metadata
         logger.info(f"Saving metadata to {metadata_path}")
         with open(metadata_path, 'wb') as f:
             pickle.dump(self.metadata, f)
@@ -234,10 +182,8 @@ class VectorStoreLayer:
         if not Path(metadata_path).exists():
             raise FileNotFoundError(f"Metadata file not found: {metadata_path}")
         
-        # Load index
         self.index = faiss.read_index(index_path)
         
-        # Load metadata
         with open(metadata_path, 'rb') as f:
             self.metadata = pickle.load(f)
         
@@ -254,13 +200,11 @@ class VectorStoreLayer:
         Search index for most similar vectors.
         
         Args:
-            query_embedding: Query vector (must be normalized)
-            top_k: Number of results to return
+            query_embedding: Query vector (normalized)
+            top_k: Number of results
             
         Returns:
             Tuple of (product_ids, distances)
-                - product_ids: List of top-K product IDs
-                - distances: Similarity scores (cosine similarity: 0 to 2)
         """
         if self.index is None:
             raise ValueError("Index not built or loaded. Call build() or load_index() first.")

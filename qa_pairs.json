@@ -1,0 +1,52 @@
+[
+  {
+    "query": "Recommend running shoes under 3000 rupees",
+    "ground_truth_answer": "Nike Revolution 6 is available at 2499 rupees and is suitable for running.",
+    "relevant_doc_ids": ["P001", "P023"]
+  },
+  {
+    "query": "Best wireless headphones for gym workouts",
+    "ground_truth_answer": "The Sony WH-XB910N has good bass and a secure fit for workouts, priced at 9990.",
+    "relevant_doc_ids": ["P045", "P067"]
+  },
+  {
+    "query": "Gaming laptop with RTX graphics under 80000",
+    "ground_truth_answer": "The Asus TUF Gaming F15 with RTX 3050 is available at 74990 rupees.",
+    "relevant_doc_ids": ["P102", "P110"]
+  },
+  {
+    "query": "Noise cancelling earbuds under 2000 rupees",
+    "ground_truth_answer": "The Boat Airdopes 141 offers basic noise isolation at 1299 rupees.",
+    "relevant_doc_ids": ["P031", "P044"]
+  },
+  {
+    "query": "4K TV with smart features under 40000",
+    "ground_truth_answer": "The Mi TV 4X 43 inch 4K Smart TV is priced at 32999 and supports Netflix and Prime Video.",
+    "relevant_doc_ids": ["P088", "P091"]
+  },
+  {
+    "query": "Budget smartphone with good camera under 15000",
+    "ground_truth_answer": "The Redmi Note 12 offers a 50MP camera system at 13999 rupees.",
+    "relevant_doc_ids": ["P200", "P210"]
+  },
+  {
+    "query": "Mechanical keyboard for coding",
+    "ground_truth_answer": "The Keychron K2 with Brown switches provides tactile feedback ideal for programming at 6999.",
+    "relevant_doc_ids": ["P155", "P162"]
+  },
+  {
+    "query": "Standing desk for home office",
+    "ground_truth_answer": "The Flexispot E5 electric standing desk supports up to 125kg and is priced at 35000.",
+    "relevant_doc_ids": ["P300", "P315"]
+  },
+  {
+    "query": "Protein powder for muscle gain",
+    "ground_truth_answer": "MuscleBlaze Whey Gold provides 25g protein per serving at 2499 for 1kg.",
+    "relevant_doc_ids": ["P400", "P410"]
+  },
+  {
+    "query": "DSLR camera for beginners under 50000",
+    "ground_truth_answer": "The Canon EOS 1500D with 18-55mm lens is available at 34990 and is ideal for beginners.",
+    "relevant_doc_ids": ["P500", "P510"]
+  }
+]

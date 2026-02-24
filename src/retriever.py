@@ -32,15 +32,7 @@ logger = logging.getLogger(__name__)
 
 
 class RetrieverLayer:
-    """
-    Retrieve and rank products based on semantic similarity.
-    
-    Design Principles:
-    - Stateless: No side effects
-    - Configurable: Top-K, thresholds all tunable
-    - Explainable: Return both products and scores
-    - Efficient: Leverages FAISS for fast search
-    """
+    """Retrieve and rank products based on semantic similarity with OOD detection."""
     
     def __init__(
         self,
@@ -49,15 +41,7 @@ class RetrieverLayer:
         df_products: pd.DataFrame,
         config_path: str = "config/config.yaml"
     ):
-        """
-        Initialize retriever.
-        
-        Args:
-            vector_store: Initialized VectorStoreLayer
-            embedder: Initialized EmbeddingLayer
-            df_products: Product dataframe with all fields
-            config_path: Path to configuration
-        """
+        """Initialize retriever with vector store, embedder, and product dataframe."""
         self.config = self._load_config(config_path)
         self.retrieval_config = self.config.get("retrieval", {})
         
@@ -65,7 +49,6 @@ class RetrieverLayer:
         self.embedder = embedder
         self.df_products = df_products
         
-        # Create product_id to row index mapping for fast lookup
         self.product_id_to_idx = {
             pid: idx for idx, pid in enumerate(df_products['product_id'])
         }
@@ -81,60 +64,33 @@ class RetrieverLayer:
     
     def retrieve(self, query: str, top_k: Optional[int] = None) -> Dict:
         """
-        Retrieve most relevant products for a query.
-        
-        Pipeline:
-        1. Embed query
-        2. Search vector store (Top-K)
-        3. Fetch product details
-        4. Filter by threshold
-        5. Return with scores
+        Retrieve most relevant products for a query with OOD detection.
         
         Args:
             query: User query string
             top_k: Number of results (uses config default if None)
             
         Returns:
-            Dict with results and metadata:
-            {
-                'query': original query,
-                'query_embedding': embedding used,
-                'results': [
-                    {
-                        'product_id': 'P001',
-                        'rank': 1,
-                        'similarity_score': 0.85,
-                        'product_name': 'Nike Revolution 6',
-                        'category': 'shoes',
-                        'description': '...',
-                        'price': 4999,
-                        'rating': 4.5
-                    },
-                    ...
-                ],
-                'total_retrieved': N,
-                'threshold_used': 0.3,
-                'retrieval_time': seconds
-            }
+            Dict with results, scores, OOD detection, and decision (ACCEPT/REJECT)
         """
         import time
         start_time = time.time()
         
         top_k = top_k or self.retrieval_config.get("top_k", 5)
         similarity_threshold = self.retrieval_config.get("similarity_threshold", 0.3)
+        domain_threshold = self.retrieval_config.get("domain_threshold", 0.65)
         
         logger.info(f"\nRetrieving products for query: '{query}'")
         logger.info(f"  • Top-K: {top_k}")
         logger.info(f"  • Similarity threshold: {similarity_threshold}")
+        logger.info(f"  • Domain threshold (OOD detection): {domain_threshold}")
         
-        # 1. Embed query
         try:
             query_embedding = self.embedder.get_embedding_for_query(query)
         except Exception as e:
             logger.error(f"Error embedding query: {e}")
             raise
         
-        # 2. Search vector store
         try:
             product_ids, similarity_scores = self.vector_store.search(query_embedding, top_k=top_k)
         except Exception as e:
@@ -143,15 +99,29 @@ class RetrieverLayer:
         
         logger.info(f"Retrieved {len(product_ids)} candidates from vector store")
         
-        # 3. Build results with product details
+        max_similarity = float(similarity_scores[0]) if len(similarity_scores) > 0 else 0.0
+        avg_top_k_similarity = float(np.mean(similarity_scores)) if len(similarity_scores) > 0 else 0.0
+        
+        logger.info(f"\n[OOD DETECTION]")
+        logger.info(f"  • Max similarity: {max_similarity:.4f}")
+        logger.info(f"  • Avg top-K similarity: {avg_top_k_similarity:.4f}")
+        logger.info(f"  • Domain threshold: {domain_threshold}")
+        
+        is_out_of_domain = (max_similarity < domain_threshold) or (avg_top_k_similarity < domain_threshold)
+        
+        if is_out_of_domain:
+            logger.warning(f"⚠️ OUT-OF-DOMAIN QUERY DETECTED!")
+            logger.warning(f"  Max similarity ({max_similarity:.4f}) and/or avg similarity ({avg_top_k_similarity:.4f})")
+            logger.warning(f"  are below domain threshold ({domain_threshold})")
+        else:
+            logger.info(f"✓ Query appears to be within domain")
+        
         results = []
         for rank, (product_id, score) in enumerate(zip(product_ids, similarity_scores), 1):
-            # Filter by threshold
             if score < similarity_threshold:
                 logger.info(f"  Filtering product {product_id} (score {score:.4f} < threshold {similarity_threshold})")
                 continue
             
-            # Fetch product data
             try:
                 product_idx = self.product_id_to_idx[product_id]
                 product_row = self.df_products.iloc[product_idx]
@@ -159,7 +129,6 @@ class RetrieverLayer:
                 logger.warning(f"Product {product_id} not found in dataframe: {e}")
                 continue
             
-            # Build result entry
             result_entry = {
                 'rank': rank,
                 'product_id': product_id,
@@ -172,22 +141,42 @@ class RetrieverLayer:
             }
             results.append(result_entry)
         
+        domain_confidence = self._calculate_domain_confidence(max_similarity, domain_threshold)
+        decision = self._make_retrieval_decision(
+            is_out_of_domain,
+            len(results),
+            max_similarity,
+            domain_threshold,
+            domain_confidence
+        )
+        
         retrieval_time = time.time() - start_time
         
         # Log results
         logger.info(f"\n{'='*60}")
-        logger.info(f"RETRIEVAL RESULTS")
+        logger.info(f"RETRIEVAL RESULTS WITH EXPLAINABILITY")
         logger.info(f"{'='*60}")
         logger.info(f"Query: '{query}'")
+        logger.info(f"Decision: {decision} | Domain Confidence: {domain_confidence}")
         logger.info(f"Results returned: {len(results)} (retrieved {len(product_ids)}, after filtering: {len(results)})")
         logger.info(f"Retrieval time: {retrieval_time:.3f} seconds\n")
         
-        for result in results:
-            logger.info(f"#{result['rank']}. {result['product_name']} (ID: {result['product_id']})")
-            logger.info(f"    Similarity: {result['similarity_score']:.4f} | Price: ₹{result['price']} | Rating: {result['rating']}⭐")
-            logger.info(f"    Category: {result['category']}")
-            logger.info(f"    Description: {result['description'][:80]}...")
-            logger.info("")
+        if decision == "REJECT":
+            if is_out_of_domain:
+                logger.warning("⚠️ REJECTION REASON: Out-of-Domain Query")
+                logger.warning(f"  No confident recommendations found.")
+                logger.warning(f"  This query appears to be outside the current product domain.")
+                logger.warning(f"  Retrieved results show low semantic similarity and mixed categories.")
+            else:
+                logger.warning("⚠️ REJECTION REASON: Low Confidence")
+                logger.warning(f"  Similarity scores are below acceptable threshold.")
+        else:
+            for result in results:
+                logger.info(f"#{result['rank']}. {result['product_name']} (ID: {result['product_id']})")
+                logger.info(f"    Similarity: {result['similarity_score']:.4f} | Price: ₹{result['price']} | Rating: {result['rating']}⭐")
+                logger.info(f"    Category: {result['category']}")
+                logger.info(f"    Description: {result['description'][:80]}...")
+                logger.info("")
         logger.info("="*60)
         
         return {
@@ -196,8 +185,57 @@ class RetrieverLayer:
             'results': results,
             'total_retrieved': len(results),
             'threshold_used': similarity_threshold,
-            'retrieval_time': retrieval_time
+            'retrieval_time': retrieval_time,
+            'max_similarity': max_similarity,
+            'avg_top_k_similarity': avg_top_k_similarity,
+            'domain_threshold': domain_threshold,
+            'is_out_of_domain': is_out_of_domain,
+            'domain_confidence': domain_confidence,
+            'decision': decision,
+            'explainability': {
+                'max_similarity_score': f"{max_similarity:.4f}",
+                'avg_top_k_similarity': f"{avg_top_k_similarity:.4f}",
+                'domain_confidence_label': domain_confidence,
+                'final_decision': decision,
+                'ood_detection_enabled': True
+            }
         }
+    
+    def _calculate_domain_confidence(self, max_similarity: float, domain_threshold: float) -> str:
+        """Calculate domain confidence: HIGH, MEDIUM, or LOW based on similarity scores."""
+        high_threshold = domain_threshold
+        medium_threshold = domain_threshold * 0.8
+        
+        if max_similarity >= high_threshold:
+            return "HIGH"
+        elif max_similarity >= medium_threshold:
+            return "MEDIUM"
+        else:
+            return "LOW"
+    
+    def _make_retrieval_decision(
+        self,
+        is_out_of_domain: bool,
+        num_results: int,
+        max_similarity: float,
+        domain_threshold: float,
+        domain_confidence: str
+    ) -> str:
+        """Make final decision: ACCEPT or REJECT based on OOD detection and confidence."""
+        if is_out_of_domain:
+            logger.warning("Decision: REJECT (out-of-domain query)")
+            return "REJECT"
+        
+        if num_results == 0:
+            logger.warning("Decision: REJECT (no results after filtering)")
+            return "REJECT"
+        
+        if domain_confidence == "LOW":
+            logger.warning("Decision: REJECT (low domain confidence)")
+            return "REJECT"
+        
+        logger.info(f"Decision: ACCEPT ({domain_confidence} confidence, {num_results} results)")
+        return "ACCEPT"
     
     def explain_retrieval(self) -> Dict:
         """

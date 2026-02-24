@@ -1,0 +1,390 @@
+{
+  "total_tests": 5,
+  "hallucinations_detected": 0,
+  "hallucination_rate": "0.0%",
+  "average_relevance_score": "92.0%",
+  "average_explainability_score": "60.3%",
+  "average_products_retrieved": "5.0",
+  "retrieval_metrics": {
+    "average_recall_at_k": "11.4%",
+    "explanation_recall": "Of all relevant items in the dataset, what % did we retrieve in top-K? Higher is better.",
+    "average_mrr": "1.000",
+    "explanation_mrr": "On average, at what position was the first relevant item? Higher is better (1.0 = rank 1)."
+  },
+  "safety_metrics": {
+    "ood_queries_detected": 0,
+    "queries_rejected": 0,
+    "acceptance_rate": "100.0%",
+    "explanation": "Rejected queries are marked OOD or low-confidence to prevent hallucinations"
+  },
+  "status": "\u2713 GOOD - System performing well",
+  "recommendations_for_improvement": [
+    "Low Recall@K: Increasing top_k or lowering similarity_threshold may help retrieve more relevant items",
+    "Increase product dataset size for better coverage",
+    "Add more diverse product descriptions (e.g., pros/cons, use cases)",
+    "Monitor LLM responses for consistent hallucination patterns",
+    "Regularly collect user feedback to refine the evaluation dataset and track metrics over time"
+  ],
+  "detailed_results": [
+    {
+      "query": "Budget running shoes for beginners",
+      "expected_categories": [
+        "shoes",
+        "sports"
+      ],
+      "retrieved_products": [
+        {
+          "id": "P001",
+          "name": "Nike Revolution 6",
+          "category": "shoes",
+          "similarity": "84.5%"
+        },
+        {
+          "id": "P003",
+          "name": "ASICS Gel-Contend 7",
+          "category": "shoes",
+          "similarity": "77.5%"
+        },
+        {
+          "id": "P018",
+          "name": "IKEA Markus",
+          "category": "furniture",
+          "similarity": "71.0%"
+        },
+        {
+          "id": "P013",
+          "name": "JBL Tune 750",
+          "category": "headphones",
+          "similarity": "70.8%"
+        },
+        {
+          "id": "P005",
+          "name": "New Balance 990v5",
+          "category": "shoes",
+          "similarity": "70.4%"
+        }
+      ],
+      "product_count": 5,
+      "relevance_score": 0.6,
+      "relevance_explanation": "\u2713 Most products match expected categories",
+      "hallucination_detected": false,
+      "hallucination_details": [
+        "No hallucinations detected"
+      ],
+      "explainability_score": 0.7899999999999999,
+      "explainability_feedback": [
+        "\u26a0\ufe0f Some reasoning provided but could be more detailed",
+        "\u26a0\ufe0f Response is quite long"
+      ],
+      "ood_detection": {
+        "is_out_of_domain": false,
+        "domain_confidence": "HIGH",
+        "decision": "ACCEPT",
+        "max_similarity": 0.8453186750411987,
+        "avg_top_k_similarity": 0.7483201026916504
+      },
+      "retrieval_metrics": {
+        "recall_at_k": {
+          "value": 0.075,
+          "explanation": "Retrieved 3 out of 40 relevant items in top-5",
+          "matches": 3,
+          "total_relevant": 40
+        },
+        "mrr": {
+          "value": 1.0,
+          "explanation": "First relevant item found at rank 1 (MRR = 1/1 = 1.000)",
+          "first_relevant_rank": 1
+        }
+      },
+      "recommendation_preview": "Okay, here are my recommendations for budget running shoes for beginners, based on the available products:\n\nI recommend the following:\n\n*   **Nike Revolution 6 (ID: P001):** This is a great option bec..."
+    },
+    {
+      "query": "Laptop suitable for video editing under 80k",
+      "expected_categories": [
+        "laptops",
+        "electronics"
+      ],
+      "retrieved_products": [
+        {
+          "id": "P010",
+          "name": "HP Pavilion Gaming 15",
+          "category": "laptops",
+          "similarity": "73.1%"
+        },
+        {
+          "id": "P150",
+          "name": "Acer Swift X",
+          "category": "laptops",
+          "similarity": "67.3%"
+        },
+        {
+          "id": "P045",
+          "name": "Apple MacBook Pro 14 M2",
+          "category": "laptops",
+          "similarity": "67.2%"
+        },
+        {
+          "id": "P049",
+          "name": "Acer Swift 3",
+          "category": "laptops",
+          "similarity": "66.2%"
+        },
+        {
+          "id": "P147",
+          "name": "HP ProBook 450",
+          "category": "laptops",
+          "similarity": "65.4%"
+        }
+      ],
+      "product_count": 5,
+      "relevance_score": 1.0,
+      "relevance_explanation": "\u2713 All retrieved products in expected categories",
+      "hallucination_detected": false,
+      "hallucination_details": [
+        "No hallucinations detected"
+      ],
+      "explainability_score": 0.7899999999999999,
+      "explainability_feedback": [
+        "\u26a0\ufe0f Some reasoning provided but could be more detailed",
+        "\u2713 Well-detailed response"
+      ],
+      "ood_detection": {
+        "is_out_of_domain": false,
+        "domain_confidence": "HIGH",
+        "decision": "ACCEPT",
+        "max_similarity": 0.7305973172187805,
+        "avg_top_k_similarity": 0.6783463358879089
+      },
+      "retrieval_metrics": {
+        "recall_at_k": {
+          "value": 0.125,
+          "explanation": "Retrieved 5 out of 40 relevant items in top-5",
+          "matches": 5,
+          "total_relevant": 40
+        },
+        "mrr": {
+          "value": 1.0,
+          "explanation": "First relevant item found at rank 1 (MRR = 1/1 = 1.000)",
+          "first_relevant_rank": 1
+        }
+      },
+      "recommendation_preview": "Okay, based on your requirements for a laptop suitable for video editing under \u20b980,000, here's my recommendation from the provided list:\n\n**HP Pavilion Gaming 15 (ID: P010)**\n\n*   **Why it's relevant:..."
+    },
+    {
+      "query": "Wireless headphones with strong bass and long battery life",
+      "expected_categories": [
+        "headphones",
+        "audio"
+      ],
+      "retrieved_products": [
+        {
+          "id": "P015",
+          "name": "Skullcandy Crusher Evo",
+          "category": "headphones",
+          "similarity": "82.3%"
+        },
+        {
+          "id": "P170",
+          "name": "JBL Live 660NC",
+          "category": "headphones",
+          "similarity": "79.7%"
+        },
+        {
+          "id": "P013",
+          "name": "JBL Tune 750",
+          "category": "headphones",
+          "similarity": "76.4%"
+        },
+        {
+          "id": "P171",
+          "name": "Raycon The Everyday Earbuds",
+          "category": "headphones",
+          "similarity": "74.4%"
+        },
+        {
+          "id": "P055",
+          "name": "Sennheiser Momentum 4",
+          "category": "headphones",
+          "similarity": "74.3%"
+        }
+      ],
+      "product_count": 5,
+      "relevance_score": 1.0,
+      "relevance_explanation": "\u2713 All retrieved products in expected categories",
+      "hallucination_detected": false,
+      "hallucination_details": [
+        "No hallucinations detected"
+      ],
+      "explainability_score": 0.09,
+      "explainability_feedback": [
+        "\u2717 Limited explanation of why products match",
+        "\u26a0\ufe0f Response is quite long"
+      ],
+      "ood_detection": {
+        "is_out_of_domain": false,
+        "domain_confidence": "HIGH",
+        "decision": "ACCEPT",
+        "max_similarity": 0.8226195573806763,
+        "avg_top_k_similarity": 0.7740702629089355
+      },
+      "retrieval_metrics": {
+        "recall_at_k": {
+          "value": 0.125,
+          "explanation": "Retrieved 5 out of 40 relevant items in top-5",
+          "matches": 5,
+          "total_relevant": 40
+        },
+        "mrr": {
+          "value": 1.0,
+          "explanation": "First relevant item found at rank 1 (MRR = 1/1 = 1.000)",
+          "first_relevant_rank": 1
+        }
+      },
+      "recommendation_preview": "Based on your needs for wireless headphones with strong bass and long battery life, here are a couple of recommendations from the available products:\n\n*   **Skullcandy Crusher Evo (ID: P015):** These ..."
+    },
+    {
+      "query": "Comfortable office chair for long hours",
+      "expected_categories": [
+        "furniture",
+        "office"
+      ],
+      "retrieved_products": [
+        {
+          "id": "P176",
+          "name": "Herman Miller Embody",
+          "category": "furniture",
+          "similarity": "75.0%"
+        },
+        {
+          "id": "P180",
+          "name": "IKEA J\u00e4rvfj\u00e4llet",
+          "category": "furniture",
+          "similarity": "73.7%"
+        },
+        {
+          "id": "P016",
+          "name": "Herman Miller Aeron",
+          "category": "furniture",
+          "similarity": "73.3%"
+        },
+        {
+          "id": "P186",
+          "name": "Branch Daily Chair",
+          "category": "furniture",
+          "similarity": "72.9%"
+        },
+        {
+          "id": "P018",
+          "name": "IKEA Markus",
+          "category": "furniture",
+          "similarity": "72.8%"
+        }
+      ],
+      "product_count": 5,
+      "relevance_score": 1.0,
+      "relevance_explanation": "\u2713 All retrieved products in expected categories",
+      "hallucination_detected": false,
+      "hallucination_details": [
+        "No hallucinations detected"
+      ],
+      "explainability_score": 0.7899999999999999,
+      "explainability_feedback": [
+        "\u26a0\ufe0f Some reasoning provided but could be more detailed",
+        "\u26a0\ufe0f Response is quite long"
+      ],
+      "ood_detection": {
+        "is_out_of_domain": false,
+        "domain_confidence": "HIGH",
+        "decision": "ACCEPT",
+        "max_similarity": 0.7498700618743896,
+        "avg_top_k_similarity": 0.7353903651237488
+      },
+      "retrieval_metrics": {
+        "recall_at_k": {
+          "value": 0.125,
+          "explanation": "Retrieved 5 out of 40 relevant items in top-5",
+          "matches": 5,
+          "total_relevant": 40
+        },
+        "mrr": {
+          "value": 1.0,
+          "explanation": "First relevant item found at rank 1 (MRR = 1/1 = 1.000)",
+          "first_relevant_rank": 1
+        }
+      },
+      "recommendation_preview": "I can recommend a few options for a comfortable office chair for long hours, based on the available products:\n\n*   **Herman Miller Embody (ID: P176):** This chair is highly recommended due to its \"adv..."
+    },
+    {
+      "query": "Yoga mat for home workouts",
+      "expected_categories": [
+        "fitness",
+        "sports"
+      ],
+      "retrieved_products": [
+        {
+          "id": "P021",
+          "name": "Hexa Yoga Mat",
+          "category": "fitness",
+          "similarity": "73.5%"
+        },
+        {
+          "id": "P075",
+          "name": "Lululemon Reversible Mat",
+          "category": "fitness",
+          "similarity": "72.2%"
+        },
+        {
+          "id": "P022",
+          "name": "Gaiam Premium Print Yoga Mat",
+          "category": "fitness",
+          "similarity": "71.6%"
+        },
+        {
+          "id": "P032",
+          "name": "Bowflex SelectTech 552",
+          "category": "fitness",
+          "similarity": "68.0%"
+        },
+        {
+          "id": "P206",
+          "name": "Sole F80 Treadmill",
+          "category": "fitness",
+          "similarity": "62.6%"
+        }
+      ],
+      "product_count": 5,
+      "relevance_score": 1.0,
+      "relevance_explanation": "\u2713 All retrieved products in expected categories",
+      "hallucination_detected": false,
+      "hallucination_details": [
+        "No hallucinations detected"
+      ],
+      "explainability_score": 0.5566666666666666,
+      "explainability_feedback": [
+        "\u26a0\ufe0f Some reasoning provided but could be more detailed",
+        "\u26a0\ufe0f Response is quite long"
+      ],
+      "ood_detection": {
+        "is_out_of_domain": false,
+        "domain_confidence": "HIGH",
+        "decision": "ACCEPT",
+        "max_similarity": 0.7350224256515503,
+        "avg_top_k_similarity": 0.6959673166275024
+      },
+      "retrieval_metrics": {
+        "recall_at_k": {
+          "value": 0.12195121951219512,
+          "explanation": "Retrieved 5 out of 41 relevant items in top-5",
+          "matches": 5,
+          "total_relevant": 41
+        },
+        "mrr": {
+          "value": 1.0,
+          "explanation": "First relevant item found at rank 1 (MRR = 1/1 = 1.000)",
+          "first_relevant_rank": 1
+        }
+      },
+      "recommendation_preview": "Okay, I can help you find a yoga mat for your home workouts from the available products. Here are my recommendations:\n\nBased on your request, here are the yoga mats that I can recommend:\n\n*   **Hexa Y..."
+    }
+  ]
+}

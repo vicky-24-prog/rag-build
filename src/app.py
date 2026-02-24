@@ -155,14 +155,53 @@ class SemanticSearchRAG:
         return complete_result
     
     def _display_results(self, result: Dict) -> None:
-        """Display formatted results."""
+        """Display formatted results with full explainability."""
         logger.info("\n" + "="*70)
-        logger.info("RECOMMENDATION")
+        logger.info("EXPLAINABILITY & TRANSPARENCY LAYER")
+        logger.info("="*70)
+        
+        # Extract key metrics
+        query = result.get('query', '')
+        decision = result['retrieval'].get('decision', 'UNKNOWN')
+        domain_confidence = result['retrieval'].get('domain_confidence', 'UNKNOWN')
+        max_similarity = result['retrieval'].get('max_similarity', 0.0)
+        avg_similarity = result['retrieval'].get('avg_top_k_similarity', 0.0)
+        
+        logger.info(f"\n📊 DECISION METRICS:")
+        logger.info(f"  • Query: '{query}'")
+        logger.info(f"  • Max Similarity: {max_similarity:.4f}")
+        logger.info(f"  • Avg Top-K Similarity: {avg_similarity:.4f}")
+        logger.info(f"  • Domain Confidence: {domain_confidence}")
+        logger.info(f"  • Final Decision: {decision}")
+        
+        # If rejected, show rejection reasoning
+        if decision == "REJECT":
+            logger.info("\n" + "="*70)
+            logger.info("⚠️ QUERY REJECTED - HONEST FEEDBACK")
+            logger.info("="*70)
+            logger.info(f"\n{result['rag']['recommendation']}\n")
+            logger.info("="*70)
+            logger.info("WHY WAS THIS REJECTED?")
+            logger.info("="*70)
+            logger.info(
+                "This is production safety behavior, not a failure.\n"
+                "Out-of-domain detection prevents hallucinations by:\n"
+                "1. Detecting when queries fall outside the product domain\n"
+                "2. Refusing to generate confident recommendations\n"
+                "3. Providing honest, trustworthy feedback\n\n"
+                "This is how real-world AI systems should behave."
+            )
+            logger.info("="*70 + "\n")
+            return
+        
+        # If accepted, show recommendation and products
+        logger.info("\n" + "="*70)
+        logger.info("✓ RECOMMENDATION")
         logger.info("="*70)
         logger.info(f"\n{result['rag']['recommendation']}\n")
         
         logger.info("="*70)
-        logger.info("RETRIEVED PRODUCTS (Used as Context)")
+        logger.info("RETRIEVED PRODUCTS (Context Used)")
         logger.info("="*70)
         
         for product in result['retrieval']['results'][:5]:
@@ -172,6 +211,8 @@ class SemanticSearchRAG:
             logger.info(f"  Rating: {product['rating']}/5 ⭐")
             logger.info(f"  Similarity: {product['similarity_score']:.1%}")
             logger.info(f"  Description: {product['description'][:100]}...")
+        
+        logger.info("\n" + "="*70)
     
     def run_interactive(self):
         """Run interactive query mode."""

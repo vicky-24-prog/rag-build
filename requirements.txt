@@ -28,3 +28,15 @@ ipython==8.14.0
 
 # Utilities
 tqdm==4.65.0
+
+# ── Upgrade 1-4: LLM-as-Judge, Routing, Evaluation, Experiment Tracking ──
+
+# Visualisation (notebooks/analysis.ipynb)
+matplotlib>=3.7.0
+seaborn>=0.12.0
+scipy>=1.11.0          # optional: KDE in faithfulness histogram
+
+# Cost / token estimation (already covered by google-generativeai)
+# Optional: OpenAI / Anthropic judge backends
+# openai>=1.0.0
+# anthropic>=0.20.0

@@ -31,29 +31,15 @@ logger = logging.getLogger(__name__)
 
 
 class RAGPipeline:
-    """
-    Generate recommendations using retrieved products as context.
-    
-    Design Principles:
-    - Context-first: LLM only sees retrieved products
-    - Instruction-led: Clear constraints prevent hallucination
-    - Explainable: Show reasoning
-    - Grounded: Every recommendation is traceable to source
-    """
+    """Generate recommendations using LLM with retrieved products as context."""
     
     def __init__(self, config_path: str = "config/config.yaml"):
-        """
-        Initialize RAG pipeline.
-        
-        Args:
-            config_path: Path to configuration file
-        """
+        """Initialize RAG pipeline with LLM."""
         self.config = self._load_config(config_path)
         self.rag_config = self.config.get("rag", {})
         self.llm = None
         self.llm_provider = self.rag_config.get("llm_provider", "gemini")
         
-        # Initialize LLM
         self._init_llm()
     
     def _load_config(self, config_path: str) -> Dict:
@@ -106,25 +92,11 @@ class RAGPipeline:
         """
         Generate recommendation based on retrieved products.
         
-        Pipeline:
-        1. Extract products from retrieval result
-        2. Format context string
-        3. Build prompt with strict instructions
-        4. Call LLM with temperature=low (factual mode)
-        5. Parse response
-        
         Args:
             retrieval_result: Output from RetrieverLayer.retrieve()
             
         Returns:
-            Dict with:
-            {
-                'query': original query,
-                'recommendation': LLM's recommendation text,
-                'reasoning': Why these products match,
-                'retrieved_products': Products from retrieval,
-                'generated_with_llm': whether LLM was actually used
-            }
+            Dict with recommendation, decision, and hallucination risk
         """
         logger.info("\n" + "="*60)
         logger.info("RAG GENERATION LAYER")
@@ -132,25 +104,32 @@ class RAGPipeline:
         
         query = retrieval_result.get('query')
         products = retrieval_result.get('results', [])
+        decision = retrieval_result.get('decision', 'UNKNOWN')
+        is_out_of_domain = retrieval_result.get('is_out_of_domain', False)
+        domain_confidence = retrieval_result.get('domain_confidence', 'UNKNOWN')
         
         logger.info(f"Query: '{query}'")
+        logger.info(f"Retrieval Decision: {decision}")
+        logger.info(f"Domain Confidence: {domain_confidence}")
         logger.info(f"Context products: {len(products)}")
         
-        # If no LLM, return retrieval results with explanation
+        if decision == "REJECT":
+            logger.warning("⚠️ REJECTING GENERATION - Query is OOD or low-confidence")
+            return self._generate_ood_rejection(query, is_out_of_domain, domain_confidence)
+        
+        logger.info("✓ Decision ACCEPTED - Proceeding with LLM generation")
+        
         if self.llm is None:
             logger.warning("LLM not initialized. Returning retrieval-only results.")
-            return self._generate_without_llm(query, products)
+            return self._generate_without_llm(query, products, decision="ACCEPT")
         
-        # Build context
         context = self._build_context(products)
         
-        # Build prompt
         prompt = self._build_prompt(query, context)
         
         logger.info(f"\nContext window size: {len(context)} characters")
         logger.info("Calling LLM for generation...")
         
-        # Generate using LLM
         try:
             response = self.llm.generate_content(
                 prompt,
@@ -163,7 +142,7 @@ class RAGPipeline:
         except Exception as e:
             logger.error(f"Error calling LLM: {e}")
             logger.info("Falling back to retrieval-only results")
-            return self._generate_without_llm(query, products)
+            return self._generate_without_llm(query, products, decision="ACCEPT")
         
         logger.info("="*60 + "\n")
         
@@ -174,15 +153,54 @@ class RAGPipeline:
             'context_used': context,
             'generated_with_llm': True,
             'llm_model': self.rag_config.get('model_name'),
-            'hallucination_risk': 'LOW (retrieval-grounded)'
+            'hallucination_risk': 'LOW (retrieval-grounded)',
+            'decision': 'ACCEPT',
+            'reason': f'In-domain query ({domain_confidence} confidence)'
         }
     
-    def _generate_without_llm(self, query: str, products: List[Dict]) -> Dict:
-        """
-        Generate response without LLM (fallback).
+    def _generate_ood_rejection(
+        self,
+        query: str,
+        is_out_of_domain: bool,
+        domain_confidence: str
+    ) -> Dict:
+        """Generate rejection response for OOD queries (production safety behavior)."""
+        if is_out_of_domain:
+            rejection_message = (
+                "❌ No confident recommendations found.\n\n"
+                "This query appears to be outside the current product domain.\n"
+                "Retrieved results show low semantic similarity and mixed categories.\n\n"
+                "💡 Suggestion: Try asking about our available product categories:\n"
+                "• Shoes & Sports\n"
+                "• Electronics & Laptops\n"
+                "• Audio & Headphones\n"
+                "• Fitness & Home Workout Equipment"
+            )
+            reason = "Out-of-domain query detected"
+        else:
+            rejection_message = (
+                "⚠️ Low confidence in recommendations.\n\n"
+                "While we found some products, the similarity scores suggest\n"
+                "our results may not match your requirements well.\n\n"
+                "Please try rephrasing your query with more specific details."
+            )
+            reason = f"Low confidence ({domain_confidence})"
         
-        Simply formats retrieval results into readable text.
-        """
+        logger.warning(f"Rejection message: {rejection_message}")
+        
+        return {
+            'query': query,
+            'recommendation': rejection_message,
+            'retrieved_products': [],
+            'generated_with_llm': False,
+            'hallucination_risk': 'NONE (query rejected before generation)',
+            'decision': 'REJECT',
+            'reason': reason,
+            'is_honest_rejection': True
+        }
+    
+    def _generate_without_llm(self, query: str, products: List[Dict], decision: str = "ACCEPT") -> Dict:
+        """Generate response without LLM (fallback: formats retrieval results)."""
         recommendation = self._format_product_list(query, products)
         
         return {
@@ -190,19 +208,12 @@ class RAGPipeline:
             'recommendation': recommendation,
             'retrieved_products': products,
             'generated_with_llm': False,
-            'hallucination_risk': 'NONE (retrieval only, no generation)'
+            'hallucination_risk': 'NONE (retrieval only, no generation)',
+            'decision': decision
         }
     
     def _build_context(self, products: List[Dict]) -> str:
-        """
-        Build formatted context string from products.
-        
-        Args:
-            products: List of product dicts from retriever
-            
-        Returns:
-            Formatted string with product details
-        """
+        """Build formatted context string from products."""
         max_products = self.rag_config.get("max_products_in_context", 5)
         products_to_include = products[:max_products]
         
@@ -220,16 +231,7 @@ class RAGPipeline:
         return "\n".join(context_lines)
     
     def _build_prompt(self, query: str, context: str) -> str:
-        """
-        Build prompt for LLM with strict instructions.
-        
-        Args:
-            query: User query
-            context: Formatted products context
-            
-        Returns:
-            Formatted prompt string
-        """
+        """Build prompt for LLM with strict instructions to prevent hallucinations."""
         instruction = self.rag_config.get("instruction", 
             "You are an e-commerce assistant. ONLY recommend from provided products. "
             "Never invent products or features."

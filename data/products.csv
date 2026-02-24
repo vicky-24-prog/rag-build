@@ -1,31 +1,301 @@
-product_id,product_name,category,description,price,rating
-P001,Nike Revolution 6,shoes,"Lightweight running shoe designed for beginners with responsive cushioning, breathable mesh upper, and durable outsole. Great for daily training.",4999,4.5
-P002,Adidas Ultraboost 23,shoes,"Premium running shoe with boost technology for maximum comfort and energy return. Suitable for both casual and serious runners.",12999,4.8
-P003,ASICS Gel-Contend 7,shoes,"Affordable running shoe with GEL cushioning technology. Perfect for budget-conscious beginners starting their running journey.",5499,4.3
-P004,Puma RS-X Core,shoes,"Retro-style casual shoe with modern comfort. Versatile for both gym and everyday wear.",6999,4.2
-P005,New Balance 990v5,shoes,"Premium American-made running shoe with balanced cushioning. Recommended for daily running and long-distance training.",13999,4.7
-P006,Dell XPS 13 Plus,laptops,"Ultra-portable 13-inch laptop ideal for creative professionals. Intel Core i7, 16GB RAM, 512GB SSD. Weighs just 2.7kg.",94999,4.6
-P007,MacBook Air M2,laptops,"Powerful laptop for video editing with Apple M2 chip, 8-core GPU, 16GB RAM, 512GB SSD. Runs Final Cut Pro smoothly.",124999,4.9
-P008,ASUS VivoBook 15,laptops,"Budget-friendly 15-inch laptop with AMD Ryzen 5, 8GB RAM, 512GB SSD. Good for light video editing tasks.",44999,4.1
-P009,Lenovo ThinkBook 14,laptops,"Lightweight business laptop with Intel Core i5, 8GB RAM, 256GB SSD. Suitable for basic creative work and everyday tasks.",49999,4.0
-P010,HP Pavilion Gaming 15,laptops,"Gaming laptop with Intel Core i7, RTX 3050, 16GB RAM, 512GB SSD. Excellent for video editing and multitasking.",74999,4.4
-P011,Sony WH-1000XM5,headphones,"Industry-leading wireless headphones with active noise cancellation, 30-hour battery life, and premium sound quality.",39999,4.9
-P012,Bose QuietComfort 45,headphones,"Premium noise-cancelling headphones with exceptional bass response and 24-hour battery life. Perfect for music enthusiasts.",37999,4.8
-P013,JBL Tune 750,headphones,"Budget wireless headphones with strong bass tuning, 15-hour battery life, and comfortable over-ear design.",8999,4.2
-P014,Anker Soundcore Liberty 4,headphones,"True wireless earbuds with bass boost, 10-hour battery life, and premium noise cancellation at an affordable price.",6999,4.3
-P015,Skullcandy Crusher Evo,headphones,"Wireless headphones with sensational bass customization, 40-hour battery life, and rugged durability.",13999,4.5
-P016,Herman Miller Aeron,furniture,"Legendary ergonomic office chair with full lumbar support, 12-year warranty. Rated #1 for long hour comfort.",128000,4.9
-P017,Steelcase Leap,furniture,"High-end ergonomic chair with 4D arms and LiveBack technology. Ideal for 8+ hour daily work sessions.",115000,4.8
-P018,IKEA Markus,furniture,"Budget-friendly office chair with basic ergonomics and comfortable padding. Good for casual home office setup.",12999,3.8
-P019,Autonomous SmartDesk Pro,furniture,"Electric standing desk with height adjustment memory presets. Ergonomic solution for dynamic working.",85000,4.6
-P020,Flexispot E7,furniture,"Heavy-duty standing desk with dual motor, smooth adjustment, and solid construction. Great for long-term use.",58000,4.4
-P021,Hexa Yoga Mat,fitness,"Non-slip yoga mat 6mm thick with natural rubber and microfiber surface. Eco-friendly and lightweight for home workouts.",2999,4.4
-P022,Liforme Yoga Mat,fitness,"Premium yoga mat with alignment markers, 4.2mm thickness, made from natural rubber and plant-based materials.",7999,4.8
-P023,Decathlon Yoga Mat,fitness,"Basic 4mm yoga mat suitable for home practice. Non-slip surface and affordable option for beginners.",1299,4.0
-P024,Manduka PRO Yoga Mat,fitness,"Professional-grade 6mm mat with lifetime warranty. Used by yoga instructors worldwide.",9999,4.7
-P025,Gaiam Classic Yoga Mat,fitness,"Affordable 4mm mat with basic non-slip properties. Perfect for casual home workouts and yoga practice.",1799,3.9
-P026,Canon EOS R6,cameras,"Full-frame mirrorless camera with 20MP sensor, 4K 60fps video, and excellent autofocus. Perfect for professional video content creation.",325000,4.7
-P027,Sony A6400,cameras,"Lightweight mirrorless camera with 24MP sensor, fast autofocus, and 4K video. Great for vlogging and content creation.",74999,4.6
-P028,GoPro Hero 11,cameras,"Rugged action camera with excellent stabilization, 4K 60fps recording, and waterproof design.",54999,4.5
-P029,DJI Osmo Action 4,cameras,"Budget action camera with strong image stabilization and 4K video capability.",18999,4.2
-P030,Panasonic Lumix S1H,cameras,"Full-frame hybrid camera with 24MP sensor, exceptional video capabilities, and unlimited 4K recording.",445000,4.8
+﻿product_id,product_name,category,description,price,rating
+P001,Nike Revolution 6,shoes,Lightweight running shoe for beginners,4999,4.5
+P002,Adidas Ultraboost 23,shoes,Premium running shoe with boost cushioning,12999,4.8
+P003,ASICS Gel-Contend 7,shoes,Affordable GEL cushioned running shoe,5499,4.3
+P004,Puma RS-X Core,shoes,Retro style shoe with modern comfort,6999,4.2
+P005,New Balance 990v5,shoes,Premium daily running shoe,13999,4.7
+P006,Dell XPS 13 Plus,laptops,Ultra portable laptop for professionals,94999,4.6
+P007,MacBook Air M2,laptops,Apple M2 powered lightweight laptop,124999,4.9
+P008,ASUS VivoBook 15,laptops,Budget laptop for students,44999,4.1
+P009,Lenovo ThinkBook 14,laptops,Business laptop for daily tasks,49999,4
+P010,HP Pavilion Gaming 15,laptops,Gaming and editing laptop,74999,4.4
+P011,Sony WH-1000XM5,headphones,Premium ANC wireless headphones,39999,4.9
+P012,Bose QuietComfort 45,headphones,Noise cancelling premium headphones,37999,4.8
+P013,JBL Tune 750,headphones,Budget wireless headphones,8999,4.2
+P014,Anker Soundcore Liberty 4,headphones,True wireless earbuds,6999,4.3
+P015,Skullcandy Crusher Evo,headphones,Bass heavy wireless headphones,13999,4.5
+P016,Herman Miller Aeron,furniture,Ergonomic office chair,128000,4.9
+P017,Steelcase Leap,furniture,High-end ergonomic chair,115000,4.8
+P018,IKEA Markus,furniture,Budget office chair,12999,3.8
+P019,Autonomous SmartDesk Pro,furniture,Electric standing desk,85000,4.6
+P020,Flexispot E7,furniture,Heavy duty standing desk,58000,4.4
+P021,Hexa Yoga Mat,fitness,Non-slip yoga mat,2999,4.6
+P022,Gaiam Premium Print Yoga Mat,fitness,Extra thick printed yoga mat,3499,4.6
+P023,Fitbit Inspire 3,fitness,Health and fitness tracker,5999,4.4
+P024,Garmin Venu Sq 2,smartwatches,GPS smartwatch with music,22990,4.5
+P025,Apple Watch SE,smartwatches,Affordable Apple Watch with essential features,29900,4.7
+P026,Sony Alpha ZV-E10,cameras,Vlogging camera with interchangeable lenses,61990,4.5
+P027,Canon EOS R50,cameras,Compact mirrorless camera for creators,75990,4.6
+P028,Logitech C920x Pro,cameras,HD Pro Webcam for streaming,8999,4.5
+P029,DJI Mini 2 SE,cameras,Lightweight drone with QHD video,29999,4.7
+P030,Fitbit Charge 5,fitness,Advanced fitness and health tracker,14999,4.5
+P031,Garmin Forerunner 245,fitness,GPS running smartwatch with advanced dynamics,29999,4.7
+P032,Bowflex SelectTech 552,fitness,Adjustable dumbbells for home gym,34999,4.8
+P033,Peloton Bike,fitness,Premium stationary bike with live classes,120000,4.6
+P034,Theragun Pro,fitness,Percussive therapy deep tissue massage gun,45000,4.9
+P035,Reebok Nano X2,shoes,Versatile training shoe for weightlifting and cardio,8999,4.4
+P036,Under Armour HOVR Phantom,shoes,Connected running shoes with zero gravity feel,11999,4.3
+P037,Brooks Ghost 14,shoes,Smooth and reliable daily running shoe,10500,4.6
+P038,Hoka One One Clifton 8,shoes,Maximum cushioning for long distance running,12500,4.7
+P039,Salomon Speedcross 5,shoes,Aggressive grip trail running shoes,13000,4.5
+P040,Nike Air Zoom Pegasus 39,shoes,Highly responsive lightweight daily runner,10495,4.6
+P041,Adidas NMD_R1,shoes,Streetwear sneaker with responsive boost midsole,12999,4.4
+P042,Vans Old Skool,shoes,Classic skate shoe with iconic side stripe,4999,4.5
+P043,Converse Chuck Taylor All Star,shoes,Timeless high-top canvas sneaker,3999,4.3
+P044,Puma Deviate Nitro,shoes,Carbon-plated high performance running shoe,14999,4.5
+P045,Apple MacBook Pro 14 M2,laptops,High-performance laptop for creative professionals,199900,4.9
+P046,Microsoft Surface Laptop 5,laptops,Sleek touchscreen laptop with long battery life,99999,4.4
+P047,Razer Blade 15,laptops,Premium build high-end gaming laptop,180000,4.5
+P048,LG Gram 16,laptops,Ultra-lightweight laptop with large screen,110000,4.6
+P049,Acer Swift 3,laptops,Affordable thin and light laptop for everyday use,55000,4.2
+P050,Lenovo Legion 5 Pro,laptops,Top-tier gaming laptop with QHD display,135000,4.8
+P051,ASUS ROG Zephyrus G14,laptops,Compact and powerful gaming powerhouse,125000,4.7
+P052,HP Spectre x360,laptops,Premium convertible 2-in-1 laptop,140000,4.6
+P053,Dell Inspiron 15,laptops,Reliable daily driver for home and office,42000,4.1
+P054,Samsung Galaxy Book2 Pro,laptops,AMOLED display ultra-thin professional laptop,115000,4.5
+P055,Sennheiser Momentum 4,headphones,Exceptional audio quality wireless headphones,29990,4.7
+P056,Apple AirPods Pro Gen 2,headphones,Active noise cancelling true wireless earbuds,24900,4.8
+P057,Jabra Elite 85t,headphones,Advanced ANC and crystal clear calls,14999,4.4
+P058,Sony WF-1000XM4,headphones,Industry leading noise cancelling earbuds,19990,4.6
+P059,Audio-Technica ATH-M50x,headphones,Professional studio monitor headphones,12999,4.8
+P060,Beats Studio3 Wireless,headphones,Over-ear headphones with active noise cancelling,25900,4.3
+P061,Samsung Galaxy Buds2 Pro,headphones,High-res audio capable wireless earbuds,16999,4.5
+P062,Nothing Ear (2),headphones,Unique transparent design true wireless earbuds,9999,4.2
+P063,Bose Sport Earbuds,headphones,Secure and weather-resistant workout earbuds,15990,4.4
+P064,Skullcandy Hesh ANC,headphones,Affordable active noise cancelling over-ear,8999,4.1
+P065,Secretlab Titan Evo,furniture,Premium multi-adjustable gaming chair,45000,4.8
+P066,IKEA Bekant,furniture,Sturdy corner desk for home office,18990,4.3
+P067,Branch Ergonomic Chair,furniture,Sleek and highly adjustable office chair,25000,4.5
+P068,Vari Electric Standing Desk,furniture,Quick-assembly dual motor sit-stand desk,65000,4.7
+P069,Ergotron WorkFit-T,furniture,Standing desk converter for existing tables,35000,4.6
+P070,IKEA Poang,furniture,Classic comfortable armchair with wooden frame,8990,4.4
+P071,Corsair T3 Rush,furniture,Racing-inspired fabric gaming chair,28000,4.4
+P072,Steelcase Gesture,furniture,Ultimate ergonomic chair for various sitting postures,140000,4.9
+P073,Fully Jarvis Bamboo,furniture,Eco-friendly bamboo top standing desk,55000,4.6
+P074,Noblechairs Hero,furniture,Spacious and supportive premium chair,38000,4.5
+P075,Lululemon Reversible Mat,fitness,5mm thick premium yoga mat,6999,4.7
+P076,Concept2 RowErg,fitness,Industry standard indoor rowing machine,95000,4.9
+P077,TRX All-in-One Suspension Trainer,fitness,Portable bodyweight resistance training system,14999,4.6
+P078,Manduka PRO Yoga Mat,fitness,Ultra-dense and spacious lifetime guarantee mat,11000,4.8
+P079,Decathlon Dumbbell Kit 20kg,fitness,Basic adjustable cast iron dumbbell set,4999,4.4
+P080,Rogue Fitness Kettlebell,fitness,Durable powder-coated cast iron kettlebell,7500,4.9
+P081,NordicTrack Commercial 1750,fitness,Heavy-duty treadmill with interactive training,185000,4.5
+P082,Gatorade Squeeze Bottle,fitness,Classic sports hydration bottle,999,4.3
+P083,Fitbit Versa 4,smartwatches,Fitness focused smartwatch with long battery,17999,4.2
+P084,Apple Watch Series 8,smartwatches,Comprehensive health and safety smartwatch,42900,4.8
+P085,Samsung Galaxy Watch 5,smartwatches,Android optimized health tracking watch,27999,4.6
+P086,Garmin Fenix 7,smartwatches,Rugged multisport GPS watch with solar charging,65000,4.8
+P087,Amazfit GTR 4,smartwatches,Stylish smartwatch with 14-day battery life,15999,4.3
+P088,Sony A7 IV,cameras,Versatile full-frame mirrorless camera for photo and video,210000,4.8
+P089,Canon EOS R6 Mark II,cameras,High-speed hybrid mirrorless camera,235000,4.7
+P090,Nikon Z6 II,cameras,Excellent low-light performance mirrorless camera,165000,4.6
+P091,Fujifilm X-T5,cameras,Classic dial-driven APS-C mirrorless camera,150000,4.8
+P092,GoPro HERO11 Black,cameras,Rugged waterproof action camera with 5.3K video,45000,4.6
+P093,DJI Mini 3 Pro,cameras,Lightweight folding drone with obstacle avoidance,85000,4.7
+P094,Insta360 X3,cameras,Pocket-sized 360-degree action camera,42000,4.5
+P095,Panasonic Lumix GH6,cameras,Professional Micro Four Thirds video camera,180000,4.6
+P096,Sony ZV-E10,cameras,Interchangeable lens vlog camera,65000,4.5
+P097,Logitech Brio 4K,cameras,Ultra HD webcam for video conferencing and streaming,16000,4.4
+P098,Elgato Facecam,cameras,Premium 1080p60 webcam for content creators,14000,4.3
+P099,Polaroid Now+,cameras,Bluetooth connected instant film camera,13999,4.1
+P100,DJI Osmo Pocket 2,cameras,Tiny 3-axis stabilized handheld camera,32000,4.6
+P101,Nike Air Max 270,shoes,Lifestyle shoe with large Air unit,11999,4.6
+P102,Nike Air Force 1,shoes,Classic low-top streetwear sneaker,7495,4.8
+P103,Adidas Stan Smith,shoes,Minimalist leather tennis shoe,7999,4.7
+P104,Puma Suede Classic,shoes,Iconic suede vintage sneaker,5999,4.5
+P105,New Balance 574,shoes,Classic retro running and lifestyle shoe,8999,4.6
+P106,Asics Gel-Kayano 29,shoes,Premium stability running shoe,13999,4.8
+P107,Brooks Adrenaline GTS 22,shoes,Supportive daily road running shoe,11999,4.7
+P108,Hoka Bondi 8,shoes,Maximum cushion road running shoe,14999,4.6
+P109,Salomon Sense Ride 4,shoes,Versatile all-terrain trail runner,10999,4.5
+P110,Vans Slip-On,shoes,Classic canvas slip-on skate shoe,3999,4.6
+P111,Converse Jack Purcell,shoes,Vintage badminton-inspired canvas shoe,4999,4.4
+P112,Reebok Classic Leather,shoes,Timeless leather casual sneaker,6999,4.5
+P113,Under Armour Curry 9,shoes,High-performance basketball shoe,13999,4.8
+P114,Mizuno Wave Rider 26,shoes,Smooth and dynamic running shoe,10999,4.6
+P115,Saucony Endorphin Speed 3,shoes,Nylon-plated fast training shoe,15999,4.7
+P116,On Cloudstratus,shoes,Maximum cushioning performance running shoe,14999,4.5
+P117,Skechers Go Walk 6,shoes,Ultra-comfortable slip-on walking shoe,5499,4.3
+P118,Fila Disruptor II,shoes,Chunky retro streetwear sneaker,6499,4.2
+P119,Timberland Premium 6-Inch,shoes,Waterproof classic leather boot,14999,4.7
+P120,Dr. Martens 1460,shoes,Iconic 8-eye leather combat boot,12999,4.6
+P121,Merrell Moab 3,shoes,Durable and comfortable hiking shoe,9999,4.7
+P122,Columbia Newton Ridge,shoes,Lightweight waterproof hiking boot,8999,4.5
+P123,Crocs Classic Clog,shoes,Lightweight water-friendly slip-on,2999,4.6
+P124,Birkenstock Arizona,shoes,Cork footbed double strap sandal,7999,4.8
+P125,Ecco Soft 7,shoes,Premium leather casual sneaker,11999,4.6
+P126,Dell Alienware m15 R7,laptops,High-performance gaming laptop with RTX graphics,225000,4.7
+P127,HP Omen 16,laptops,Sleek and powerful gaming laptop,145000,4.6
+P128,Lenovo ThinkPad X1 Carbon,laptops,Premium ultra-light business laptop,165000,4.9
+P129,Asus ZenBook 14,laptops,Ultra-slim laptop with OLED display,85000,4.5
+P130,Acer Predator Helios 300,laptops,Popular mid-range gaming powerhouse,115000,4.6
+P131,MSI Stealth 15M,laptops,Ultra-thin stealth gaming laptop,135000,4.5
+P132,Apple MacBook Pro 16 M2 Max,laptops,Ultimate workstation for creative pros,349900,4.9
+P133,Microsoft Surface Pro 9,laptops,Versatile 2-in-1 tablet laptop hybrid,105999,4.5
+P134,LG Gram 17,laptops,Incredibly light 17-inch productivity laptop,130000,4.6
+P135,Samsung Galaxy Book3 Ultra,laptops,Premium creator laptop with AMOLED display,280000,4.7
+P136,Razer Blade 17,laptops,Desktop replacement premium gaming laptop,260000,4.6
+P137,Gigabyte Aero 16,laptops,Creator-focused laptop with color-accurate screen,175000,4.5
+P138,Dell Latitude 7430,laptops,Durable enterprise business laptop,120000,4.4
+P139,HP EliteBook 840 G9,laptops,Secure and sleek corporate laptop,125000,4.5
+P140,Lenovo Yoga 9i,laptops,Premium convertible laptop with soundbar hinge,140000,4.7
+P141,Asus ROG Strix Scar 15,laptops,Esports-ready high refresh rate laptop,190000,4.8
+P142,Acer Nitro 5,laptops,Budget-friendly entry-level gaming laptop,65000,4.3
+P143,MSI Katana GF66,laptops,Affordable 144Hz gaming laptop,75000,4.4
+P144,Framework Laptop,laptops,Modular and fully upgradeable laptop,95000,4.8
+P145,System76 Lemur Pro,laptops,Linux-first lightweight developer laptop,110000,4.6
+P146,Dell Vostro 3510,laptops,Reliable small business budget laptop,38000,4.1
+P147,HP ProBook 450,laptops,Sturdy everyday business laptop,55000,4.2
+P148,Lenovo IdeaPad Flex 5,laptops,Affordable 2-in-1 convertible laptop,60000,4.3
+P149,Asus Chromebook Flip,laptops,Premium Chrome OS convertible,45000,4.4
+P150,Acer Swift X,laptops,Thin laptop with discrete graphics for creators,85000,4.5
+P151,Sony WH-CH720N,headphones,Lightweight over-ear noise cancelling headphones,9990,4.4
+P152,Bose QuietComfort Earbuds II,headphones,Best-in-class ANC true wireless earbuds,26900,4.8
+P153,Sennheiser HD 600,headphones,Audiophile open-back reference headphones,29990,4.9
+P154,Apple AirPods 3rd Gen,headphones,Open-fit spatial audio wireless earbuds,19900,4.6
+P155,Jabra Elite 7 Pro,headphones,Compact earbuds with multi-sensor voice tech,17999,4.5
+P156,Beats Fit Pro,headphones,Secure-fit wireless earbuds with spatial audio,19900,4.7
+P157,Audio-Technica ATH-M40x,headphones,Flat-tuned professional monitor headphones,8999,4.7
+P158,Shure AONIC 50,headphones,Studio-quality wireless ANC headphones,24999,4.6
+P159,Bowers & Wilkins Px7 S2,headphones,Premium design and high-fidelity wireless sound,34900,4.8
+P160,Bang & Olufsen Beoplay HX,headphones,Luxury ANC headphones with lambskin leather,44990,4.6
+P161,Master & Dynamic MW75,headphones,Premium materials ANC wireless headphones,49990,4.5
+P162,Grado SR80x,headphones,Retro-style on-ear open-back headphones,12999,4.7
+P163,HiFiMan Sundara,headphones,Planar magnetic audiophile headphones,29999,4.8
+P164,AKG K371,headphones,Closed-back foldable studio headphones,11999,4.6
+P165,Beyerdynamic DT 770 Pro,headphones,Closed-back studio mixing headphones,13999,4.8
+P166,Anker Soundcore Life Q30,headphones,Value-packed hybrid ANC headphones,7999,4.5
+P167,Skullcandy Sesh Evo,headphones,Compact and affordable true wireless earbuds,2999,4.2
+P168,JLab Go Air Pop,headphones,Budget-friendly pocket-sized earbuds,2499,4.3
+P169,Marshall Major IV,headphones,Iconic design on-ear headphones with 80h battery,11999,4.6
+P170,JBL Live 660NC,headphones,Punchy bass wireless noise cancelling headphones,9999,4.5
+P171,Raycon The Everyday Earbuds,headphones,Compact bass-heavy wireless earbuds,7999,4.1
+P172,EarFun Air Pro 3,headphones,Affordable ANC earbuds with aptX adaptive,6999,4.4
+P173,Samsung Galaxy Buds Live,headphones,Unique bean-shaped open type ANC earbuds,7990,4.3
+P174,Google Pixel Buds Pro,headphones,Smart ANC earbuds with Google Assistant,16990,4.6
+P175,OnePlus Buds Pro 2,headphones,Dual-driver ANC earbuds co-created with Dynaudio,11999,4.6
+P176,Herman Miller Embody,furniture,Advanced ergonomic chair for extended sitting,165000,4.9
+P177,Steelcase Amia,furniture,Versatile and comfortable ergonomic task chair,75000,4.7
+P178,Haworth Fern,furniture,Nature-inspired high-end ergonomic chair,95000,4.8
+P179,Humanscale Freedom,furniture,Self-adjusting executive ergonomic chair,110000,4.6
+P180,IKEA Järvfjället,furniture,Adjustable high-back office chair,14990,4.3
+P181,Secretlab Omega,furniture,Compact premium gaming and office chair,38000,4.7
+P182,Noblechairs Epic,furniture,Luxury faux leather gaming chair,35000,4.6
+P183,Razer Iskur,furniture,Gaming chair with built-in lumbar support,42000,4.5
+P184,Corsair T1 Race,furniture,Motorsport-inspired PC gaming chair,28000,4.4
+P185,Autonomous ErgoChair Pro,furniture,Fully adjustable modern ergonomic desk chair,45000,4.6
+P186,Branch Daily Chair,furniture,Minimalist and supportive home office chair,18000,4.5
+P187,Hon Ignition 2.0,furniture,Reliable and customizable mid-back chair,32000,4.6
+P188,Uplift V2 Standing Desk,furniture,Highly customizable dual-motor standing desk,70000,4.8
+P189,Fully Remi Standing Desk,furniture,Simplified budget-friendly standing desk,45000,4.5
+P190,VariDesk Pro Plus,furniture,Top-tier desktop standing converter,35000,4.7
+P191,Eureka Ergonomic Z1-S,furniture,Z-shaped gaming desk with RGB lighting,18000,4.5
+P192,Walker Edison L-Shaped Desk,furniture,Glass corner computer desk for home office,15000,4.3
+P193,Sauder Edge Water Desk,furniture,Traditional wood finish executive desk,25000,4.2
+P194,Bush Furniture Cabot,furniture,L-shaped desk with hutch storage,35000,4.4
+P195,Zinus Soho Desk,furniture,Simple modern minimalist computer table,8000,4.3
+P196,IKEA Malm Desk,furniture,Clean design desk with pull-out panel,12990,4.5
+P197,West Elm Mid-Century Desk,furniture,Stylish acorn wood finish writing desk,45000,4.6
+P198,CB2 Drommen Desk,furniture,Acacia wood and metal designer desk,55000,4.5
+P199,Pottery Barn Bedford Desk,furniture,Classic modular storage desk system,65000,4.7
+P200,Crate & Barrel Knox Desk,furniture,Industrial style open frame desk,40000,4.6
+P201,Bowflex C6 Bike,fitness,Magnetic resistance indoor cycling bike,85000,4.7
+P202,NordicTrack S22i,fitness,Studio cycle with incline and large screen,145000,4.8
+P203,Echelon Connect EX-5,fitness,Smart connected indoor exercise bike,90000,4.6
+P204,Schwinn IC4,fitness,Smooth and quiet belt drive cycling bike,75000,4.7
+P205,Peloton Tread,fitness,Premium smart treadmill with studio classes,250000,4.8
+P206,Sole F80 Treadmill,fitness,Durable folding treadmill with cushion flex,135000,4.7
+P207,ProForm Pro 2000,fitness,Interactive training smart treadmill,120000,4.6
+P208,Horizon 7.0 AT,fitness,Quick-dial folding treadmill for intervals,85000,4.5
+P209,WaterRower Natural,fitness,Ash wood rowing machine with water resistance,95000,4.8
+P210,Hydrow Rower,fitness,Live outdoor reality rowing machine,195000,4.9
+P211,Concept2 SkiErg,fitness,Nordic skiing indoor training machine,85000,4.8
+P212,Assault AirBike Classic,fitness,Heavy-duty fan resistance air bike,75000,4.7
+P213,Rogue Echo Bike,fitness,Overbuilt durable fan bike for crossfit,85000,4.9
+P214,TRX Pro4,fitness,Professional grade suspension trainer kit,22000,4.8
+P215,SPRI Resistance Bands,fitness,Heavy duty rubber exercise resistance tubes,1500,4.6
+P216,CAP Barbell Set,fitness,150 lb rubber hex dumbbell weight set,35000,4.7
+P217,PowerBlock Elite EXP,fitness,Compact adjustable dumbbell block set,45000,4.8
+P218,Ironmaster Quick-Lock,fitness,Heavy duty adjustable dumbbells up to 75 lbs,65000,4.9
+P219,REP Fitness Bench,fitness,Adjustable flat to incline weight bench,25000,4.8
+P220,Titan Fitness Rack,fitness,T-3 series heavy duty power rack,55000,4.7
+P221,Yes4All Kettlebell,fitness,Solid cast iron vinyl coated kettlebell,2500,4.6
+P222,Onnit Primal Bell,fitness,Custom sculpted gorilla face iron kettlebell,8500,4.8
+P223,Bosu Balance Trainer,fitness,Original half-dome balance training ball,12000,4.7
+P224,Ab Roller Wheel,fitness,Ultra-wide core training ab wheel,1200,4.5
+P225,Perfect Fitness Pushup,fitness,Rotating pushup handles for deep engagement,2500,4.6
+P226,Apple Watch Ultra,smartwatches,Rugged titanium smartwatch for extreme sports,89900,4.9
+P227,Samsung Galaxy Watch 5 Pro,smartwatches,Durable titanium smartwatch with massive battery,44999,4.7
+P228,Garmin Epix Gen 2,smartwatches,Premium active smartwatch with AMOLED display,85000,4.8
+P229,Fitbit Sense 2,smartwatches,Advanced health and stress management smartwatch,24999,4.5
+P230,Amazfit T-Rex 2,smartwatches,Military-grade rugged outdoor smartwatch,15999,4.6
+P231,Suunto 9 Peak,smartwatches,Ultra-thin and tough GPS sports watch,55000,4.6
+P232,Polar Vantage V2,smartwatches,Premium multisport watch with performance tests,45000,4.5
+P233,Coros Vertix 2,smartwatches,Adventure watch with dual-frequency GPS,65000,4.7
+P234,TicWatch Pro 3 Ultra,smartwatches,Wear OS watch with dual-display technology,25000,4.4
+P235,Fossil Gen 6,smartwatches,Stylish designer Wear OS smartwatch,23995,4.3
+P236,Skagen Falster Gen 6,smartwatches,Minimalist Scandinavian design smartwatch,21995,4.4
+P237,Michael Kors Access Gen 6,smartwatches,Fashion-forward luxury smartwatch,27995,4.3
+P238,Withings ScanWatch,smartwatches,Hybrid smartwatch with ECG and SpO2,28000,4.6
+P239,Garmin Instinct 2 Solar,smartwatches,Rugged GPS watch with infinite battery life,42990,4.8
+P240,Fitbit Luxe,smartwatches,Fashionable fitness and wellness tracker,10999,4.4
+P241,Garmin Venu 2 Plus,smartwatches,GPS smartwatch with voice functionality,46990,4.7
+P242,Huawei Watch GT 3 Pro,smartwatches,Titanium body watch with premium design,29999,4.5
+P243,Honor MagicWatch 2,smartwatches,14-day battery life fitness smartwatch,11999,4.4
+P244,Xiaomi Mi Band 7 Pro,smartwatches,Large screen fitness tracker with built-in GPS,5999,4.3
+P245,OnePlus Watch,smartwatches,Sleek smartwatch with fast warp charging,14999,4.2
+P246,Realme Watch 3 Pro,smartwatches,Budget smartwatch with AMOLED and Bluetooth calling,4999,4.1
+P247,Noise ColorFit Pro 4,smartwatches,Affordable smartwatch with digital crown,2999,4
+P248,boAt Xtend,smartwatches,Budget smartwatch with Alexa built-in,2499,4.1
+P249,Fire-Boltt Invincible,smartwatches,Bluetooth calling smartwatch with internal storage,4500,4
+P250,Fastrack Reflex Vox,smartwatches,Youth-focused colorful fitness smartwatch,4995,4.2
+P251,Sony A7S III,cameras,Masterclass full-frame low-light 4K video camera,300000,4.9
+P252,Canon EOS R3,cameras,Professional high-speed sports mirrorless camera,500000,4.9
+P253,Nikon Z9,cameras,Flagship mirrorless camera with 8K video,475000,4.9
+P254,Fujifilm X-H2S,cameras,High-speed stacked sensor APS-C camera,215000,4.8
+P255,Panasonic Lumix S5,cameras,Compact full-frame mirrorless for photo and video,160000,4.7
+P256,Olympus OM-D E-M1 Mark III,cameras,Rugged Micro Four Thirds professional camera,145000,4.6
+P257,Pentax K-3 Mark III,cameras,Classic enthusiast DSLR with optical viewfinder,170000,4.5
+P258,Leica Q2,cameras,Luxury compact full-frame camera with fixed lens,450000,4.8
+P259,Ricoh GR IIIx,cameras,Pocketable APS-C premium compact camera,85000,4.7
+P260,GoPro HERO10 Black,cameras,High frame rate 5.3K action camera,35000,4.6
+P261,DJI Action 2,cameras,Magnetic modular wearable action camera,29990,4.4
+P262,Insta360 ONE RS,cameras,Modular action camera with interchangeable lenses,45000,4.5
+P263,Sony RX100 VII,cameras,Premium compact camera with fast autofocus,95000,4.7
+P264,Canon PowerShot G7 X Mark III,cameras,Popular point-and-shoot camera for vloggers,65000,4.5
+P265,Panasonic Lumix LX100 II,cameras,Enthusiast compact camera with multi-aspect sensor,75000,4.6
+P266,Fujifilm X100V,cameras,Premium compact camera with hybrid viewfinder,125000,4.9
+P267,Sigma fp L,cameras,Ultra-compact high resolution full-frame camera,195000,4.5
+P268,Blackmagic Pocket Cinema Camera 6K,cameras,Professional 6K raw video cinema camera,185000,4.8
+P269,Red Komodo 6K,cameras,Global shutter compact cinema camera,550000,4.9
+P270,Z CAM E2-S6,cameras,Super 35mm 6K professional cinema camera,225000,4.7
+P271,DJI Mavic 3,cameras,Flagship drone with Hasselblad camera,180000,4.8
+P272,Autel EVO Lite+,cameras,Advanced drone with 6K video and 1-inch sensor,135000,4.6
+P273,Skydio 2+,cameras,Drone with unparalleled autonomous subject tracking,95000,4.7
+P274,Polaroid Go,cameras,World's smallest analog instant camera,9999,4.3
+P275,Fujifilm Instax Mini 11,cameras,Easy to use entry-level instant film camera,5999,4.6
+P276,Apple iPhone 14 Pro,smartphones,Dynamic island display with A16 Bionic chip,129900,4.8
+P277,Samsung Galaxy S23 Ultra,smartphones,Premium Android flagship with built-in S-Pen,124999,4.9
+P278,Google Pixel 7 Pro,smartphones,Incredible computational photography smartphone,84999,4.7
+P279,OnePlus 11,smartphones,Hasselblad tuned high-performance smartphone,56999,4.6
+P280,Xiaomi 13 Pro,smartphones,Leica co-engineered 1-inch sensor smartphone,79999,4.6
+P281,Vivo X90 Pro,smartphones,Zeiss optics low-light photography flagship,84999,4.5
+P282,Oppo Find X5 Pro,smartphones,Unique ceramic design flagship phone,89999,4.6
+P283,Sony Xperia 1 IV,smartphones,True optical zoom lens creator smartphone,115000,4.5
+P284,Asus ROG Phone 6,smartphones,Ultimate mobile gaming phone with 165Hz screen,71999,4.7
+P285,Motorola Edge 30 Ultra,smartphones,200MP camera smartphone with 125W charging,54999,4.5
+P286,Nothing Phone (1),smartphones,Unique transparent design with Glyph interface,29999,4.4
+P287,Realme GT 2 Pro,smartphones,Eco-friendly paper tech design flagship,49999,4.5
+P288,iQOO 11,smartphones,Esports optimized Snapdragon 8 Gen 2 phone,59999,4.6
+P289,Poco F4 GT,smartphones,Budget gaming phone with pop-up triggers,45000,4.4
+P290,Samsung Galaxy Z Fold 4,smartphones,Premium foldable phone for multitasking,154999,4.7
+P291,Samsung Galaxy Z Flip 4,smartphones,Compact and stylish folding clamshell phone,89999,4.6
+P292,Motorola Razr 2022,smartphones,Iconic flip phone design with modern specs,79999,4.5
+P293,Oppo Find N2,smartphones,Compact and lightweight foldable smartphone,110000,4.6
+P294,Vivo X Fold+,smartphones,No-compromise premium foldable phone,130000,4.7
+P295,Huawei Mate 50 Pro,smartphones,Variable aperture camera flagship,95000,4.6
+P296,Honor Magic 4 Pro,smartphones,Cinematic videography flagship phone,85000,4.5
+P297,Google Pixel 6a,smartphones,Mid-range phone with flagship-level camera,29999,4.6
+P298,Apple iPhone 13 mini,smartphones,Powerful and compact 5.4-inch smartphone,64900,4.7
+P299,Samsung Galaxy A54,smartphones,Premium mid-range phone with long battery life,38999,4.5
+P300,OnePlus Nord 2T,smartphones,Reliable all-rounder mid-range phone,28999,4.4
